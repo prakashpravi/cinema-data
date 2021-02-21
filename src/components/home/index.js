@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography, Input } from 'antd'
-import { VideoCameraOutlined } from '@ant-design/icons'
+// import { VideoCameraOutlined } from '@ant-design/icons'
 import './styled.css'
 const { Title } = Typography
 const { Search } = Input
