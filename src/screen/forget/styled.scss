@@ -1,0 +1,88 @@
+.workspace {
+    background: #F3F6FF;
+    height: 100vh;
+    display: flex;
+
+    .title {
+        color: rgba(0, 0, 0, 0.85);
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 46px;
+        text-align: center;
+        letter-spacing: -0.75px;
+        width: 100%;
+        margin: 8px !important;
+    }
+
+    .dis_title {
+        font-size: 18px;
+        line-height: 27px;
+        margin: 8px;
+        color: #454245;
+        width: 100%;
+        text-align: center;
+    }
+
+    .workspacelog {
+        margin: auto;
+        border: 1px solid #f0f0f0;
+        background: #fff;
+        padding: 30px 0px;
+        box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.25);
+        border-radius: 12px;
+    }
+
+    .Input,
+    .ant-input-affix-wrapper:focus,
+    .ant-input-affix-wrapper-focused {
+        outline: none !important;
+        box-shadow: none !important;
+        border-radius: 4px;
+    }
+
+    .login-form {
+        margin: auto;
+        text-align: center;
+        width: 80%;
+    }
+
+    .ant-form-item {
+        margin-top: 26px;
+        margin: 20px;
+    }
+
+    .login-form-button {
+        border-radius: 2px;
+        width: 100%;
+        background-color: #313eda;
+        border-color: #313eda;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        height: 40px;
+
+        // padding: 18px 0px;
+        .loginIcon {
+            margin-top: 4px;
+            float: right;
+        }
+    }
+
+    .already {
+        font-weight: 700;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .login-form {
+        width: 100% !important;
+    }
+
+    .workspacelog {
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+    }
+}

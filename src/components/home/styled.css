@@ -1,0 +1,102 @@
+.drivermain {
+  background: #F3F6FF;
+  width: 100vw;
+  height: 100vh;
+  padding: 70px 40px;
+  overflow: auto;
+}
+
+.drivermain .title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+
+.drivermain .search_field {
+  width: 50%;
+}
+
+.drivermain .search {
+  margin: auto;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.drivermain .Input,
+.drivermain .ant-input-search .ant-input:hover,
+.drivermain .ant-input-search .ant-input:focus {
+  outline: none !important;
+  border: 1px solid #FF7620;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.drivermain input,
+.drivermain button {
+  height: 50px !important;
+}
+
+.drivermain button {
+  width: 120px !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+  line-height: 0px;
+  font-size: 17px;
+  font-weight: 600;
+  background-color: #FF7620;
+  border: none;
+}
+
+.drivermain .ant-btn-primary:hover,
+.drivermain .ant-btn-primary:focus {
+  background-color: #FF7620 !important;
+}
+
+.drivermain ::-webkit-input-placeholder {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.drivermain :-ms-input-placeholder {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.drivermain ::-ms-input-placeholder {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.drivermain ::placeholder {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.drivermain input {
+  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
+  line-height: 0px;
+  font-size: 17px;
+  border: 1px solid #FF7620;
+  font-weight: 600;
+}
+
+@media (max-width: 426px) {
+  .drivermain {
+    width: 100vw;
+    height: 100%;
+    padding: 70px 20px;
+  }
+  .search_field {
+    width: 100% !important;
+  }
+}
+/*# sourceMappingURL=styled.css.map */

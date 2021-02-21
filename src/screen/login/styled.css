@@ -1,0 +1,223 @@
+.main-login {
+  contain: content;
+  border-radius: 0px;
+  height: 100vh;
+  margin: auto;
+}
+
+.main-login .f-col {
+  background-color: #F3F6FF;
+  width: 100%;
+}
+
+.main-login .s-col {
+  display: block;
+}
+
+@media only screen and (max-width: 768px) {
+  .main-login .s-col {
+    display: none;
+  }
+}
+
+.main-login .circle-ripple {
+  background-color: transparent;
+  width: 1px;
+  height: 1px;
+  border-radius: 40%;
+  -webkit-animation: ripple 0.5s linear infinite;
+          animation: ripple 0.5s linear infinite;
+  right: 10px;
+  position: absolute;
+}
+
+@-webkit-keyframes wait {
+  0% {
+    opacity: 0;
+  }
+}
+
+@keyframes wait {
+  0% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes ripple {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 #88eae0, 0 0 0 1em #88eae0, 0 0 0 3em #88eae0, 0 0 0 5em #88eae0;
+            box-shadow: 0 0 0 0 #88eae0, 0 0 0 1em #88eae0, 0 0 0 3em #88eae0, 0 0 0 5em #88eae0;
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 1em #88eae0, 0 0 0 3em #88eae0, 0 0 0 5em #88eae0, 0 0 0 8em rgba(175, 166, 255, 0);
+            box-shadow: 0 0 0 1em #88eae0, 0 0 0 3em #88eae0, 0 0 0 5em #88eae0, 0 0 0 8em rgba(175, 166, 255, 0);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 #88eae0, 0 0 0 1em #88eae0, 0 0 0 3em #88eae0, 0 0 0 5em #88eae0;
+            box-shadow: 0 0 0 0 #88eae0, 0 0 0 1em #88eae0, 0 0 0 3em #88eae0, 0 0 0 5em #88eae0;
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 1em #88eae0, 0 0 0 3em #88eae0, 0 0 0 5em #88eae0, 0 0 0 8em rgba(175, 166, 255, 0);
+            box-shadow: 0 0 0 1em #88eae0, 0 0 0 3em #88eae0, 0 0 0 5em #88eae0, 0 0 0 8em rgba(175, 166, 255, 0);
+  }
+}
+
+.main {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.main .login-form {
+  min-width: 400px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  -webkit-box-shadow: #f3f3f3 1px 1px;
+          box-shadow: #f3f3f3 1px 1px;
+  border-radius: 12px;
+  position: relative;
+  border: 1px solid #f0f0f0;
+  text-align: center;
+}
+
+.main .login-form .google-btn {
+  width: 100%;
+  margin: 12px 0px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.25);
+  color: #000;
+  border: none;
+  height: 40px;
+}
+
+.main .login-form .google-btn .google-icon {
+  float: left;
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+}
+
+.main .login-form .google-btn span {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.main .login-form-forgot {
+  float: right;
+  color: #5e5e5e;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: -27px;
+  text-decoration: underline;
+}
+
+.main .login-form-keep {
+  float: left;
+  color: #5e5e5e;
+  font-weight: 500;
+  margin-top: -27px;
+  cursor: pointer;
+}
+
+.main .remember {
+  color: #5e5e5e;
+  font-weight: 500;
+}
+
+.main .login-form-button {
+  border-radius: 2px;
+  width: 100%;
+  background-color: #313eda;
+  border-color: #313eda;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  height: 40px;
+}
+
+.main .login-form-button .loginIcon {
+  margin-top: 4px;
+  float: right;
+}
+
+.main ::-webkit-input-placeholder {
+  color: #999;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.main :-ms-input-placeholder {
+  color: #999;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.main ::-ms-input-placeholder {
+  color: #999;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.main ::placeholder {
+  color: #999;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.main .ant-form-item {
+  margin-bottom: 20px;
+}
+
+.main .ant-form-item input {
+  height: 30px;
+}
+
+.main .ant-form-item-explain-error {
+  color: #db2269;
+  font-size: 0.9em;
+  border-color: #db2269;
+}
+
+.main .title {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 18px;
+  margin-bottom: 26px;
+  margin-top: 10px;
+}
+
+.main .dis_title {
+  margin: 0px 0px 12px;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 13px;
+  margin-bottom: 20px;
+  margin-top: 0.1em !important;
+}
+
+.main .login-form-register {
+  color: #5e5e5e;
+  font-weight: 500;
+}
+
+.main .Input,
+.main .ant-input-affix-wrapper:focus,
+.main .ant-input-affix-wrapper-focused {
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  border-radius: 4px;
+}
+
+@media only screen and (max-width: 768px) {
+  .main .login-form {
+    width: 93% !important;
+    min-width: 93% !important;
+  }
+}
+/*# sourceMappingURL=styled.css.map */

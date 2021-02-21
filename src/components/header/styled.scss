@@ -1,0 +1,45 @@
+.headermain {
+    position: fixed;
+    width: 100vw;
+    z-index: 1;
+
+    .ant-page-header {
+        background-color: #300e6c !important;
+        color: #fff !important;
+
+        .ant-page-header-heading-extra {
+            margin: 4px 0px 0px 0px;
+        }
+    }
+
+    .Breadcrumb {
+        font-size: 11px;
+
+        .home {
+            font-size: 16px;
+            color: #fff !important;
+            border-bottom: 1px solid #FF7620;
+            font-weight: bold;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+    }
+
+    .icon {
+        font-size: 18px;
+        cursor: pointer;
+        margin: auto 12px;
+    }
+
+    .avatar_icon {
+        margin-top: -6px;
+        margin-right: 8px;
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 426px) {
+    .headermain {
+        width: 100vw;
+    }
+}
