@@ -1,7 +1,7 @@
 .headermain {
     position: fixed;
     width: 100vw;
-    z-index: 1;
+    z-index: 10;
 
     .ant-page-header {
         background-color: #300e6c !important;
@@ -12,16 +12,46 @@
         }
     }
 
+    .ant-page-header-heading-left {
+        width: 100%;
+
+        .ant-page-header-heading-title {
+            margin: auto;
+            width: 100%;
+            text-align: center;
+
+            .Breadcrumb {
+                display: flex;
+
+                .center_of {
+                    margin: auto;
+                }
+
+                span {
+                    margin: 0px 20px;
+
+                }
+
+                .ant-breadcrumb-separator {
+                    display: none;
+                }
+            }
+        }
+    }
+
     .Breadcrumb {
         font-size: 11px;
 
         .home {
             font-size: 16px;
             color: #fff !important;
-            border-bottom: 1px solid #FF7620;
             font-weight: bold;
             cursor: pointer;
             letter-spacing: 1px;
+        }
+
+        .active {
+            border-bottom: 1px solid #FF7620;
         }
     }
 

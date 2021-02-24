@@ -220,4 +220,12 @@
     min-width: 93%;
   }
 }
+
+.ant-steps {
+  padding: 20px;
+}
+
+.steps-action {
+  margin-top: 24px;
+}
 /*# sourceMappingURL=styled.css.map */

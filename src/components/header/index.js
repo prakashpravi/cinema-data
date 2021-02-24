@@ -10,13 +10,19 @@ class Header extends React.Component {
         <PageHeader
           ghost={false}
           title={
-            <Breadcrumb separator='>' className='Breadcrumb'>
-              <Breadcrumb.Item
-                className='home'
-                onClick={() => this.props.history.push('/home')}
-              >
-                Home
-              </Breadcrumb.Item>
+            <Breadcrumb separator={false} className='Breadcrumb'>
+              <Breadcrumb.Item className='home'>Logo</Breadcrumb.Item>
+
+              <div className='center_of'>
+                <Breadcrumb.Item
+                  className='home active'
+                  onClick={() => this.props.history.push('/home')}
+                >
+                  Demo1
+                </Breadcrumb.Item>
+                <Breadcrumb.Item className='home'>Demo2</Breadcrumb.Item>
+                <Breadcrumb.Item className='home'>Demo3</Breadcrumb.Item>
+              </div>
             </Breadcrumb>
           }
           extra={[

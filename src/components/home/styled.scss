@@ -69,12 +69,21 @@
         font-weight: 600;
     }
 
+    .guidline {
+        width: 100%;
+        display: block;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: underline;
+        margin-top: 4px;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+    }
 }
 
 @media (max-width: 426px) {
     .drivermain {
         width: 100vw;
-        height: 100%;
         padding: 70px 20px;
     }
 

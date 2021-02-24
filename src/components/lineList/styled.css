@@ -1,0 +1,56 @@
+.linelist_main {
+  margin-top: 30px;
+}
+
+.linelist_main .ant-card {
+  -webkit-box-shadow: #f3f3f3 1px 1px;
+          box-shadow: #f3f3f3 1px 1px;
+  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+}
+
+.linelist_main .ant-card .ant-card-cover {
+  border-radius: 12px;
+  overflow: hidden;
+  height: 200px;
+}
+
+.linelist_main .ant-card .ant-card-cover img {
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.linelist_main .ant-card .ant-card-cover .ant-card-body {
+  padding: 12px;
+}
+
+.modal_title {
+  letter-spacing: 1px;
+  font-size: 12px !important;
+}
+
+.modal_title label {
+  font-size: 14px !important;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.modal_title_dis {
+  letter-spacing: 1px;
+  font-size: 12px !important;
+  margin-top: 20px;
+}
+
+.modal_title_dis label {
+  font-size: 14px !important;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 426px) {
+  .modal_title {
+    margin-top: 20px;
+  }
+}
+/*# sourceMappingURL=styled.css.map */

@@ -57,7 +57,7 @@ class Login extends React.Component {
                   className='avatar'
                 />
                 <Title level={3} className='title'>
-                  Welcome to the cinema world!
+                  Sign In
                 </Title>
                 <Form.Item
                   name='username'

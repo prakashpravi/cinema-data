@@ -9,7 +9,7 @@ class Home extends React.Component {
     this.state = {}
   }
   Content = () => {
-    if (window.location.pathname === routes.HomeCom) {
+    if (window.location.pathname === routes.HomeCom || '/') {
       return <HomeCom {...this.props} />
     }
   }

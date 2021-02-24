@@ -1,0 +1,54 @@
+.linelist_main {
+    margin-top: 30px;
+
+    .ant-card {
+        box-shadow: rgb(243, 243, 243) 1px 1px;
+        border-radius: 12px;
+        border: 1px solid #f0f0f0;
+
+        .ant-card-cover {
+            border-radius: 12px;
+            overflow: hidden;
+            height: 200px;
+
+            img {
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .ant-card-body {
+                padding: 12px;
+            }
+        }
+    }
+
+}
+
+.modal_title {
+    letter-spacing: 1px;
+    font-size: 12px !important;
+
+    label {
+        font-size: 14px !important;
+        font-weight: 500;
+        letter-spacing: 1px;
+    }
+}
+
+.modal_title_dis {
+    letter-spacing: 1px;
+    font-size: 12px !important;
+    margin-top: 20px;
+
+    label {
+        font-size: 14px !important;
+        font-weight: 500;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 426px) {
+    .modal_title {
+        margin-top: 20px;
+    }
+}
