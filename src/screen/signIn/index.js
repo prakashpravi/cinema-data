@@ -55,6 +55,7 @@ class SignIn extends React.Component {
       message: 'Success',
       description: 'Your account created has been successful!'
     })
+    localStorage.setItem('token', 'token')
     this.props.history.push('/home')
   }
   handleSubmit = async () => {
@@ -291,7 +292,7 @@ class SignIn extends React.Component {
                             className='avatar'
                           />
                           <Title level={3} className='title'>
-                            Enter your change password
+                            Enter your password
                           </Title>
 
                           <Form.Item

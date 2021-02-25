@@ -1,20 +1,38 @@
 import React from 'react'
-import { Typography, Input } from 'antd'
+import { Typography, Input, message } from 'antd'
 // import { VideoCameraOutlined } from '@ant-design/icons'
 import './styled.css'
 import AutoPlay from '../slider'
+import ModalCom from '../comman/dialogbox'
 import LinelistCom from '../lineList'
 const { Title, Text } = Typography
 const { Search } = Input
 class HomeCom extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = { open: false }
   }
-  handleSubmit = () => {}
-  render () {
+  handleSubmit = async () => {
+    if (!localStorage.getItem('token')) {
+      await message.info('Please sign in to continue...', 5)
+      this.props.history.push('/login')
+    }
+  }
+  handleopn = () => {
+    const state = this.state
+    this.setState({
+      open: !state.open
+    })
+  }
+  render () { 
+    const { open } = this.state
     return (
       <div className='drivermain'>
+        <ModalCom
+          open={open}
+          onCancel={() => this.handleopn()}
+          okText={false}
+        >I'll explain to Soon !</ModalCom>
         <AutoPlay />
         <div className='search'>
           <Title level={4} className='title'>
@@ -25,12 +43,14 @@ class HomeCom extends React.Component {
             placeholder='Search title...'
             enterButton='Search'
             size='large'
-            onClick={() => {
+            onSearch={() => {
               this.handleSubmit()
             }}
             // loading
           />
-          <Text className='guidline'>How to use this</Text>
+          <Text className='guidline' onClick={() => this.handleopn()}>
+            How to use this
+          </Text>
           <LinelistCom />
         </div>
       </div>

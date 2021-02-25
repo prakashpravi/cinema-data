@@ -37,6 +37,7 @@ class Login extends React.Component {
       message: 'Success',
       description: 'User login has been successful!'
     })
+    localStorage.setItem('token', 'token')
     this.props.history.push('/home')
   }
   render () {

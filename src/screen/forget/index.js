@@ -68,7 +68,7 @@ class Forget extends React.Component {
                 Submit <ArrowRightOutlined className='loginIcon' />
               </Button>
               <span className='login-form-register'>
-                Back to your login &nbsp;
+                Back to your sign in &nbsp;
                 <span
                   style={{ cursor: 'pointer', textDecoration: 'underline' }}
                   onClick={() => this.props.history.push('/login')}
