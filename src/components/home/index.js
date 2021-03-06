@@ -42,6 +42,12 @@ class HomeCom extends React.Component {
       })
     }
   }
+  handleChanges = e => {
+    this.setState({
+      ...this.state,
+      searchdata: e
+    })
+  }
   handleopn = () => {
     const state = this.state
     this.setState({
@@ -96,7 +102,7 @@ class HomeCom extends React.Component {
             enterButton='Search'
             size='large'
             value={searchdata}
-            onChange={e => this.handleSubmit(e.target.value)}
+            onChange={e => this.handleChanges(e.target.value)}
             onSearch={e => {
               this.handleSubmit(e)
             }}
