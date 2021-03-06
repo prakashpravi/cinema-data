@@ -100,6 +100,40 @@
   cursor: pointer;
 }
 
+.drivermain .pay_btn {
+  margin-top: 20px;
+  width: 120px !important;
+  border-radius: 8px !important;
+  line-height: 0px;
+  font-size: 17px;
+  font-weight: 600;
+  background-color: #FF7620 !important;
+  border: none;
+  color: #fff;
+}
+
+.drivermain .pay_btn :hover {
+  background-color: #FF7620 !important;
+  color: #fff;
+}
+
+.continue_pay_btn {
+  margin-top: 20px;
+  border-radius: 8px !important;
+  line-height: 0px;
+  font-size: 17px;
+  font-weight: 600;
+  background-color: #FF7620 !important;
+  border: none;
+  color: #fff;
+  width: 100%;
+}
+
+.continue_pay_btn :hover {
+  background-color: #FF7620 !important;
+  color: #fff !important;
+}
+
 @media (max-width: 426px) {
   .drivermain {
     width: 100vw;

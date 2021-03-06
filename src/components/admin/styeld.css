@@ -1,0 +1,26 @@
+.main_admin {
+  margin-top: 30px;
+  background: #F3F6FF;
+  width: 99vw;
+  height: 100vh;
+  padding: 70px 40px;
+  overflow: auto;
+}
+
+.main_admin .continue_submit_btn {
+  margin-top: 20px;
+  border-radius: 8px !important;
+  line-height: 0px;
+  font-size: 17px;
+  font-weight: 600;
+  background-color: #FF7620 !important;
+  border: none;
+  color: #fff;
+  width: 100%;
+}
+
+.main_admin .continue_submit_btn :hover {
+  background-color: #FF7620 !important;
+  color: #fff !important;
+}
+/*# sourceMappingURL=styeld.css.map */
