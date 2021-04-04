@@ -33,7 +33,6 @@ class HomeCom extends React.Component {
     }
   }
   componentDidMount = async () => {
-    debugger
     this.props.client
       .query({
         query: allMoviesTitles
