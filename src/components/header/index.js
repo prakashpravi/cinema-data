@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   PageHeader,
-  Avatar,
   Upload,
   Breadcrumb,
   Dropdown,
@@ -9,13 +8,17 @@ import {
   Drawer,
   Input
 } from 'antd'
-import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { UserOutlined, LockOutlined, DownOutlined } from '@ant-design/icons'
 import './styled.css'
 
 class Header extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { open: false, username: "Black Panther", password: "Black Panther" }
+    this.state = {
+      open: false,
+      username: 'Black Panther',
+      password: 'Black Panther'
+    }
   }
   logout = () => {
     localStorage.removeItem('token')
@@ -89,17 +92,27 @@ class Header extends React.Component {
           ghost={false}
           title={
             <Breadcrumb separator={false} className='Breadcrumb'>
-              <Breadcrumb.Item className='home'>Logo</Breadcrumb.Item>
+              <Breadcrumb.Item className='home'>
+                <img
+                  alt='img'
+                  style={{
+                    width: '38px',
+                    position: 'absolute',
+                    marginTop: -8
+                  }}
+                  src='assets/TITLES (2).png'
+                />
+              </Breadcrumb.Item>
 
               <div className='center_of'>
                 <Breadcrumb.Item
                   className='home active'
                   onClick={() => this.props.history.push('/home')}
                 >
-                  Demo1
+                  Home
                 </Breadcrumb.Item>
-                <Breadcrumb.Item className='home'>Demo2</Breadcrumb.Item>
-                <Breadcrumb.Item className='home'>Demo3</Breadcrumb.Item>
+                <Breadcrumb.Item className='home'>Prices</Breadcrumb.Item>
+                <Breadcrumb.Item className='home'>About</Breadcrumb.Item>
               </div>
             </Breadcrumb>
           }
@@ -124,10 +137,25 @@ class Header extends React.Component {
                 </Menu>
               }
             >
-              <Avatar
+              <span
+                style={{
+                  cursor: 'pointer'
+                }}
+              >
+                {' '}
+                More
+                <DownOutlined
+                  style={{
+                    fontSize: '15px',
+                    margin: '4px 0px 0px 2px',
+                    position: 'absolute'
+                  }}
+                />
+              </span>
+              {/* <Avatar
                 className='avatar_icon'
                 src='https://i.pinimg.com/564x/95/79/c1/9579c179f04e0f7c52cb3932ec916910.jpg'
-              />
+              /> */}
             </Dropdown>
           ]}
         />

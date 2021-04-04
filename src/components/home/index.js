@@ -5,6 +5,8 @@ import './styled.css'
 import AutoPlay from '../slider'
 import ModalCom from '../comman/dialogbox'
 import LinelistCom from '../lineList'
+import { allMoviesTitles } from '../../hooks/query'
+import { withApollo } from 'react-apollo'
 const { Title, Text } = Typography
 const { Search } = Input
 const { Option } = Select
@@ -29,6 +31,19 @@ class HomeCom extends React.Component {
         }
       ]
     }
+  }
+  componentDidMount = async () => {
+    debugger
+    this.props.client
+      .query({
+        query: allMoviesTitles
+      })
+      .then(response => {
+        alert(JSON.stringify(response))
+      })
+      .catch(err => {
+        console.log('err:', err)
+      })
   }
   // Black Panther
   handleSubmit = async e => {
@@ -167,4 +182,4 @@ class HomeCom extends React.Component {
   }
 }
 
-export default HomeCom
+export default withApollo(HomeCom)

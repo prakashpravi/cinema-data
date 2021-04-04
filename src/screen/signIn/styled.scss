@@ -1,4 +1,7 @@
 .main-login {
+    .ant-steps{
+        display: none;
+    }
     contain: content;
     // margin: 50px auto;
     // width: 80%;
@@ -66,20 +69,24 @@
 
 .main {
     // background: #f9f9f9;
-    height: 100%;
+    height: 100vh;
     display: flex;
 
     .login-form {
         min-width: 400px;
         margin: auto;
         background: #fff;
-        padding: 30px;
+        padding: 20px;
         box-shadow: rgb(243, 243, 243) 1px 1px;
         border-radius: 12px;
         position: relative;
         border: 1px solid #f0f0f0;
         text-align: center;
-
+        img {
+            object-fit: scale-down;
+            width: 36px;
+            margin: auto;
+        }
         .google-btn {
             width: 100%;
             margin: 12px 0px;
@@ -174,7 +181,7 @@
     .title {
         color: rgba(0, 0, 0, 0.85);
         font-size: 18px;
-        margin-bottom: 26px;
+        // margin-bottom: 26px;
         margin-top: 10px;
     }
 
@@ -202,7 +209,7 @@
 
 @media only screen and (max-width: 768px) {
     .main .login-form {
-        width: 93%;
+        width: 97% !important;
         min-width: 93%;
     }
 }

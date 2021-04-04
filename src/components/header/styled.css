@@ -70,6 +70,18 @@
 }
 
 @media (max-width: 426px) {
+  .headermain .ant-page-header-heading-left .ant-page-header-heading-title .Breadcrumb span {
+    margin: 0px 6px;
+  }
+  .ant-page-header-compact .ant-page-header-heading {
+    width: 100%;
+    display: contents;
+  }
+  .headermain .ant-page-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
   .headermain {
     width: 100vw;
   }

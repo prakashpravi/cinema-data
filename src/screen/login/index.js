@@ -33,12 +33,29 @@ class Login extends React.Component {
   }
   handleSubmit = async () => {
     await message.loading('Login In....', 5)
-    notification.success({
-      message: 'Success',
-      description: 'User login has been successful!'
+    fetch('http://3.141.17.227:3001/api/login', {
+      method: 'POST',
+
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password
+      })
     })
-    localStorage.setItem('token', 'token')
-    this.props.history.push('/home')
+      .then(response => {
+        if (response) {
+          notification.success({
+            message: 'Success',
+            description: 'User login has been successful!'
+          })
+          localStorage.setItem('token', 'token')
+          this.props.history.push('/home')
+        } else {
+          message.error('Faild to login', 5)
+        }
+      })
+      .catch(error => {
+        message.error(error, 5)
+      })
   }
   render () {
     const { username, password } = this.state
@@ -54,7 +71,7 @@ class Login extends React.Component {
               >
                 <Avatar
                   size={54}
-                  src='https://i.pinimg.com/564x/95/79/c1/9579c179f04e0f7c52cb3932ec916910.jpg'
+                  src='assets/TITLES (2).png'
                   className='avatar'
                 />
                 <Title level={3} className='title'>
@@ -73,6 +90,9 @@ class Login extends React.Component {
                     autoFocus
                     autoComplete='off'
                     className='Input'
+                    onChange={e =>
+                      this.setInputValue('username', e.target.value)
+                    }
                     prefix={<UserOutlined className='site-form-item-icon' />}
                     value={username}
                     placeholder='Username'
@@ -91,6 +111,9 @@ class Login extends React.Component {
                     value={password}
                     autoComplete='off'
                     className='Input'
+                    onChange={e =>
+                      this.setInputValue('password', e.target.value)
+                    }
                     prefix={<LockOutlined className='site-form-item-icon' />}
                     type='password'
                     placeholder='Password'

@@ -5,6 +5,10 @@
   margin: auto;
 }
 
+.main-login .ant-steps {
+  display: none;
+}
+
 .main-login .f-col {
   background-color: #F3F6FF;
   width: 100%;
@@ -66,7 +70,7 @@
 }
 
 .main {
-  height: 100%;
+  height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -76,13 +80,20 @@
   min-width: 400px;
   margin: auto;
   background: #fff;
-  padding: 30px;
+  padding: 20px;
   -webkit-box-shadow: #f3f3f3 1px 1px;
           box-shadow: #f3f3f3 1px 1px;
   border-radius: 12px;
   position: relative;
   border: 1px solid #f0f0f0;
   text-align: center;
+}
+
+.main .login-form img {
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+  width: 36px;
+  margin: auto;
 }
 
 .main .login-form .google-btn {
@@ -188,7 +199,6 @@
 .main .title {
   color: rgba(0, 0, 0, 0.85);
   font-size: 18px;
-  margin-bottom: 26px;
   margin-top: 10px;
 }
 
@@ -216,7 +226,7 @@
 
 @media only screen and (max-width: 768px) {
   .main .login-form {
-    width: 93%;
+    width: 97% !important;
     min-width: 93%;
   }
 }

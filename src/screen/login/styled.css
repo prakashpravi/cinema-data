@@ -85,6 +85,13 @@
   text-align: center;
 }
 
+.main .login-form img {
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+  width: 36px;
+  margin: auto;
+}
+
 .main .login-form .google-btn {
   width: 100%;
   margin: 12px 0px;

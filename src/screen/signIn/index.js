@@ -7,9 +7,11 @@ import {
   Avatar,
   Typography,
   Row,
-  Col
+  Col,
+  DatePicker
 } from 'antd'
 import * as React from 'react'
+import moment from 'moment'
 import {
   UserOutlined,
   LockOutlined,
@@ -28,11 +30,12 @@ class SignIn extends React.Component {
       firstname: null,
       lastname: null,
       password: null,
-      mobilenumber: null,
+      mobile_no: null,
       email: null,
       otp: null,
       newpassword: null,
-      current: 0
+      current: 0,
+      birthday: null
     }
   }
   next = () => {
@@ -49,7 +52,35 @@ class SignIn extends React.Component {
     await message.loading('Loading....', 5)
     this.next()
   }
+  handleSubmits = async () => {
+    await message.loading('Loading....', 5)
+    fetch('http://3.141.17.227:3001/api/sign_up', {
+      method: 'POST',
+
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+        birthday: moment(this.state.birthday).format('DD-MM-YYYY'),
+        mobile_no: this.state.mobile_no
+      })
+    })
+      .then(response => {
+        debugger
+        if (response) {
+          notification.success({
+            message: 'Success',
+            description: 'Your account created has been successful!'
+          })
+          localStorage.setItem('token', 'token')
+          this.props.history.push('/home')
+        }
+      })
+      .catch(error => {
+        message.error(error, 5)
+      })
+  }
   handleSubmitSigin = async () => {
+    debugger
     await message.loading('Loading....', 5)
     notification.success({
       message: 'Success',
@@ -59,8 +90,8 @@ class SignIn extends React.Component {
     this.props.history.push('/home')
   }
   handleSubmit = async () => {
-    await message.loading('Loading....', 5)
-    this.next()
+    // await message.loading('Loading....', 5)
+    // this.next()
   }
   render () {
     const {
@@ -68,10 +99,11 @@ class SignIn extends React.Component {
       lastname,
       current,
       email,
-      mobilenumber,
+      mobile_no,
       otp,
       newpassword,
-      password
+      password,
+      birthday
     } = this.state
     return (
       <div className='main-login'>
@@ -89,14 +121,21 @@ class SignIn extends React.Component {
                           className='login-form'
                           onFinish={() => this.handleSubmit()}
                         >
-                          <Avatar
-                            size={54}
-                            src='https://i.pinimg.com/564x/95/79/c1/9579c179f04e0f7c52cb3932ec916910.jpg'
-                            className='avatar'
-                          />
-                          <Title level={3} className='title'>
-                            Sign Up
-                          </Title>
+                          <span
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'center'
+                            }}
+                          >
+                            <Avatar
+                              size={54}
+                              src='assets/TITLES (2).png'
+                              className='avatar'
+                            />
+                            <Title level={3} className='title'>
+                              Sign Up
+                            </Title>
+                          </span>
                           <Form.Item
                             name='firstname'
                             rules={[
@@ -114,6 +153,9 @@ class SignIn extends React.Component {
                                 <UserOutlined className='site-form-item-icon' />
                               }
                               value={firstname}
+                              onChange={e =>
+                                this.setInputValue('firstname', e.target.value)
+                              }
                               placeholder='First Name'
                             />
                           </Form.Item>
@@ -130,6 +172,9 @@ class SignIn extends React.Component {
                               autoFocus
                               autoComplete='off'
                               className='Input'
+                              onChange={e =>
+                                this.setInputValue('lastname', e.target.value)
+                              }
                               prefix={
                                 <UserOutlined className='site-form-item-icon' />
                               }
@@ -152,9 +197,27 @@ class SignIn extends React.Component {
                               prefix={
                                 <MailOutlined className='site-form-item-icon' />
                               }
+                              onChange={e =>
+                                this.setInputValue('email', e.target.value)
+                              }
                               value={email}
                               placeholder='Email'
                               type='email'
+                            />
+                          </Form.Item>
+                          <Form.Item
+                            name='birthday'
+                            rules={[
+                              {
+                                required: true,
+                                message: 'Please enter your date of birth!'
+                              }
+                            ]}
+                          >
+                            <DatePicker
+                              value={birthday}
+                              style={{ width: '100%' }}
+                              onChange={e => this.setInputValue('birthday', e)}
                             />
                           </Form.Item>
                           <Form.Item
@@ -172,18 +235,43 @@ class SignIn extends React.Component {
                               prefix={
                                 <MobileOutlined className='site-form-item-icon' />
                               }
-                              value={mobilenumber}
+                              onChange={e =>
+                                this.setInputValue('mobile_no', e.target.value)
+                              }
+                              value={mobile_no}
                               placeholder='Mobile Number'
                               type='number'
                             />
                           </Form.Item>
-
+                          <Form.Item
+                            name='password'
+                            rules={[
+                              {
+                                required: true,
+                                message: 'Please enter your password!'
+                              }
+                            ]}
+                          >
+                            <Input.Password
+                              autoComplete='off'
+                              className='Input'
+                              prefix={
+                                <LockOutlined className='site-form-item-icon' />
+                              }
+                              onChange={e =>
+                                this.setInputValue('password', e.target.value)
+                              }
+                              type='password'
+                              value={password}
+                              placeholder='Current Password'
+                            />
+                          </Form.Item>
                           <Form.Item>
                             <Button
                               type='primary'
                               htmlType='submit'
                               className='login-form-button'
-                              // onClick={() => this.handleSubmit()}
+                              onClick={() => this.handleSubmits()}
                             >
                               Submit{' '}
                               <ArrowRightOutlined className='loginIcon' />
