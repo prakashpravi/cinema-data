@@ -1,0 +1,23 @@
+.main-form {
+    width: 99vw;
+    z-index: 10;
+    text-align: center;
+    background-color: #F3F6FF;
+    padding: 20px 0px;
+
+    .filed {
+        margin: 10px 0px;
+    }
+
+    .titles {
+        text-align: left;
+        padding: 0px 10px;
+        margin: 0px;
+    }
+
+    .cards {
+        margin: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+    }
+}

@@ -27,8 +27,8 @@ class SignIn extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      firstname: null,
-      lastname: null,
+      first_name: null,
+      last_name: null,
       password: null,
       mobile_no: null,
       email: null,
@@ -55,24 +55,35 @@ class SignIn extends React.Component {
   handleSubmits = async () => {
     await message.loading('Loading....', 5)
     fetch('http://3.141.17.227:3001/api/sign_up', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
       method: 'POST',
-
       body: JSON.stringify({
         email: this.state.email,
         password: this.state.password,
-        birthday: moment(this.state.birthday).format('DD-MM-YYYY'),
-        mobile_no: this.state.mobile_no
+        birthday: moment(this.state.birthday).format('YYYY-MM-DD'),
+        mobile_no: this.state.mobile_no,
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+        profile_img: ''
       })
     })
+      .then(data => {
+        return data.json()
+      })
       .then(response => {
-        debugger
-        if (response) {
+        if (response.data) {
           notification.success({
             message: 'Success',
             description: 'Your account created has been successful!'
           })
-          localStorage.setItem('token', 'token')
-          this.props.history.push('/home')
+          // localStorage.setItem('token', response?.token)
+          // localStorage.setItem('user_id', response?.data?.id)
+          this.props.history.push('/login')
+        } else {
+          message.error('Faild to Sign In', 5)
         }
       })
       .catch(error => {
@@ -95,8 +106,8 @@ class SignIn extends React.Component {
   }
   render () {
     const {
-      firstname,
-      lastname,
+      first_name,
+      last_name,
       current,
       email,
       mobile_no,
@@ -137,7 +148,7 @@ class SignIn extends React.Component {
                             </Title>
                           </span>
                           <Form.Item
-                            name='firstname'
+                            name='first_name'
                             rules={[
                               {
                                 required: true,
@@ -152,15 +163,15 @@ class SignIn extends React.Component {
                               prefix={
                                 <UserOutlined className='site-form-item-icon' />
                               }
-                              value={firstname}
+                              value={first_name}
                               onChange={e =>
-                                this.setInputValue('firstname', e.target.value)
+                                this.setInputValue('first_name', e.target.value)
                               }
                               placeholder='First Name'
                             />
                           </Form.Item>
                           <Form.Item
-                            name='lastname'
+                            name='last_name'
                             rules={[
                               {
                                 required: true,
@@ -173,12 +184,12 @@ class SignIn extends React.Component {
                               autoComplete='off'
                               className='Input'
                               onChange={e =>
-                                this.setInputValue('lastname', e.target.value)
+                                this.setInputValue('last_name', e.target.value)
                               }
                               prefix={
                                 <UserOutlined className='site-form-item-icon' />
                               }
-                              value={lastname}
+                              value={last_name}
                               placeholder='Last Name'
                             />
                           </Form.Item>

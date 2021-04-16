@@ -14,6 +14,7 @@ class RouterApp extends React.Component {
           <Route path='/signin' component={SignIn} />
           <Route path='/admin' component={Home} />
           <Route path="/home" component={Home} />
+          <Route  path="/form" component={Home} />
         </Switch>
       </Router>
     )

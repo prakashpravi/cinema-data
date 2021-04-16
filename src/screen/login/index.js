@@ -32,22 +32,30 @@ class Login extends React.Component {
     })
   }
   handleSubmit = async () => {
+    debugger
     await message.loading('Login In....', 5)
     fetch('http://3.141.17.227:3001/api/login', {
       method: 'POST',
-
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         username: this.state.username,
         password: this.state.password
       })
     })
+      .then(data => {
+        return data.json()
+      })
       .then(response => {
-        if (response) {
+        if (response.info === 'login sucess') {
           notification.success({
             message: 'Success',
             description: 'User login has been successful!'
           })
-          localStorage.setItem('token', 'token')
+          localStorage.setItem('token', response?.token)
+          localStorage.setItem('user_id', response?.data?.id)
           this.props.history.push('/home')
         } else {
           message.error('Faild to login', 5)

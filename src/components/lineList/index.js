@@ -2,6 +2,7 @@ import React from 'react'
 import './styled.css'
 import { Card, Row, Col, Typography } from 'antd'
 import ModalCom from '../comman/dialogbox'
+
 const { Meta } = Card
 const { Title } = Typography
 class LinelistCom extends React.Component {
@@ -39,10 +40,10 @@ class LinelistCom extends React.Component {
                 <label>Name :</label>
                 {show_data?.name}
               </Title>
-              <Title level={5} className='modal_title'>
+              {/* <Title level={5} className='modal_title'>
                 <label>Registered name :</label>
                 {show_data?.registered_name}
-              </Title>
+              </Title> */}
               <Title level={5} className='modal_title'>
                 <label>Registered date :</label> {show_data?.registered_date}
               </Title>
@@ -59,9 +60,9 @@ class LinelistCom extends React.Component {
                 <Card
                   onClick={() => this.handleModal(list)}
                   hoverable
-                  cover={<img alt='example' src={list.img} />}
+                  cover={<img alt='example' src={list?.img} />}
                 >
-                  <Meta title={list.name} />
+                  <Meta title={list?.name} />
                 </Card>
               </Col>
             )

@@ -7,7 +7,7 @@ const initialCtx = {
         // apiUrl: API_URL, 
         // token: null, 
         // homePage: HOME_PAGE_URL,
-        graphqlUrl: 'http://3.141.17.227:3001/graphiql',
+        graphqlUrl: 'http://3.141.17.227:3001/graphql',
         graphqlWsUrl: 'ws://3.141.17.227:3001'
     },
     setNetworkCtx: () => null
