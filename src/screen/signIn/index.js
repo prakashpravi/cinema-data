@@ -8,7 +8,8 @@ import {
   Typography,
   Row,
   Col,
-  DatePicker
+  DatePicker,
+  Upload
 } from 'antd'
 import * as React from 'react'
 import moment from 'moment'
@@ -35,7 +36,9 @@ class SignIn extends React.Component {
       otp: null,
       newpassword: null,
       current: 0,
-      birthday: null
+      birthday: null,
+      movieImage: null,
+      fileList: []
     }
   }
   next = () => {
@@ -53,6 +56,11 @@ class SignIn extends React.Component {
     this.next()
   }
   handleSubmits = async () => {
+    const { movieImage } = this.state
+    if (!movieImage) {
+      message.error('Please upload the movie image', 5)
+      return false
+    }
     await message.loading('Loading....', 5)
     fetch('http://3.141.17.227:3001/api/sign_up', {
       headers: {
@@ -67,7 +75,7 @@ class SignIn extends React.Component {
         mobile_no: this.state.mobile_no,
         first_name: this.state.first_name,
         last_name: this.state.last_name,
-        profile_img: ''
+        profile_img: this.state.movieImage
       })
     })
       .then(data => {
@@ -91,7 +99,6 @@ class SignIn extends React.Component {
       })
   }
   handleSubmitSigin = async () => {
-    debugger
     await message.loading('Loading....', 5)
     notification.success({
       message: 'Success',
@@ -104,6 +111,29 @@ class SignIn extends React.Component {
     // await message.loading('Loading....', 5)
     // this.next()
   }
+  getBase64 = (img, callback) => {
+    const reader = new FileReader()
+    reader.addEventListener('load', () => callback(reader.result))
+    return reader.readAsDataURL(img)
+  }
+  handleChange = e => {
+    if (!e.file.originFileObj) {
+      return
+    }
+    this.getBase64(e.file.originFileObj, imageUrl => {
+      this.setState({
+        fileList: [
+          {
+            uid: '-1',
+            name: e.file.name,
+            status: 'done',
+            url: imageUrl
+          }
+        ],
+        movieImage: imageUrl
+      })
+    })
+  }
   render () {
     const {
       first_name,
@@ -114,7 +144,8 @@ class SignIn extends React.Component {
       otp,
       newpassword,
       password,
-      birthday
+      birthday,
+      fileList
     } = this.state
     return (
       <div className='main-login'>
@@ -147,6 +178,28 @@ class SignIn extends React.Component {
                               Sign Up
                             </Title>
                           </span>
+                          <Upload
+                            onChange={e => this.handleChange(e)}
+                            action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
+                            fileList={fileList}
+                            multiple={false}
+                            onRemove={() =>
+                              this.setState({
+                                fileList: [],
+                                movieImage: null
+                              })
+                            }
+                          >
+                            <span
+                              style={{
+                                padding: 8,
+                                border: '1px solid #d9d9d9'
+                              }}
+                            >
+                              + Upload
+                            </span>
+                          </Upload>
+                          <br />
                           <Form.Item
                             name='first_name'
                             rules={[

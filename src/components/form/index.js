@@ -67,7 +67,6 @@ class Forms extends React.Component {
     })
   }
   handleSubmit = () => {
-      debugger
     const { moviename, description, validity, movieImage } = this.state
     if (!movieImage) {
       message.error('Please upload the movie image', 5)
@@ -202,6 +201,9 @@ class Forms extends React.Component {
           >
             <Row gutter={16}>
               <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
+                <Title level={5} className='titles'>
+                  Movie Image
+                </Title>
                 <Upload
                   onChange={e => this.handleChange(e)}
                   action='https://www.mocky.io/v2/5cc8019d300000980a055e76'

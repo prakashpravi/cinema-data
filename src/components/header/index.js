@@ -20,7 +20,7 @@ class Header extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      open: true,
+      open: false,
       firstName: null,
       lastName: null,
       email: null,
