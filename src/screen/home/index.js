@@ -6,6 +6,7 @@ import HomeCom from '../../components/home'
 import Admin from '../../components/admin'
 import Form from '../../components/form/index'
 import Mymovie from '../../components/mymoive/index'
+import PasswordChange from "../../screen/password/index"
 import Notification from '../../components/notification/index'
 class Home extends React.Component {
   constructor (props) {
@@ -13,7 +14,9 @@ class Home extends React.Component {
     this.state = {}
   }
   Content = () => {
-    if (window.location.pathname === routes.notification) {
+    if (window.location.pathname === routes.passwordchange) {
+      return <PasswordChange {...this.props} />
+    }else if (window.location.pathname === routes.notification) {
       return <Notification {...this.props} />
     } else if (window.location.pathname === routes.mymovie) {
       return <Mymovie {...this.props} />

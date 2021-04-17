@@ -10,38 +10,44 @@ import {
 import * as React from 'react'
 import { ArrowRightOutlined, RollbackOutlined } from '@ant-design/icons'
 import './styled.css'
-import { MailOutlined } from '@ant-design/icons'
 const { Title } = Typography
-class Forget extends React.Component {
+class PasswordChange extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      email: null
+      password: null,
+      otp: null
     }
+  }
+  setInputValue = (name, val) => {
+    this.setState({
+      [name]: val
+    })
   }
   handleSubmit = async () => {
     await message.loading('Loding...', 5)
-    fetch('http://3.141.17.227:3001/api/forget_password', {
+    fetch('http://3.141.17.227:3001/api/new_password', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: this.state.email
+        password: this.state.password,
+        otp: this.state.otp,
+        id: localStorage.getItem('forget_id')
       })
     })
       .then(data => {
         return data.json()
       })
       .then(response => {
-        if (response.info === 'email send successfully') {
+        if (response.info === 'password change successfully') {
           notification.success({
             message: 'Success',
-            description: 'Your email sended successful!'
+            description: 'Your password change successfully!'
           })
-          this.props.history.push('/passwordchange')
-          localStorage.setItem('forget_id', response?.data?.id)
+          this.props.history.push('/login')
         } else {
           message.error('Faild', 5)
         }
@@ -50,15 +56,11 @@ class Forget extends React.Component {
         message.error(error, 5)
       })
   }
-  setInputValue = (name, val) => {
-    this.setState({
-      [name]: val
-    })
-  }
+
   render () {
-    const { email } = this.state
+    const { otp, password } = this.state
     return (
-      <div className='workspace'>
+      <div className='passwordchange'>
         <Row className='workspacelog'>
           <Title level={5} className='dis_title'>
             Forget password
@@ -69,11 +71,11 @@ class Forget extends React.Component {
             onFinish={() => this.handleSubmit()}
           >
             <Form.Item
-              name='email'
+              name='otp'
               rules={[
                 {
                   required: true,
-                  message: 'Please enter your mail!'
+                  message: 'Please enter your otp!'
                 }
               ]}
             >
@@ -82,12 +84,29 @@ class Forget extends React.Component {
                 autoFocus
                 autoComplete='off'
                 className='Input'
-                prefix={<MailOutlined />}
-                value={email}
-                onChange={e =>
-                  this.setInputValue('email', e.target.value)
+                value={otp}
+                placeholder='Please enter OTP'
+                onChange={e => this.setInputValue('otp', e.target.value)}
+              />
+            </Form.Item>
+            <Form.Item
+              name='password'
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter your password!'
                 }
-                placeholder='example@gmail.com'
+              ]}
+            >
+              <Input.Password
+                size='large'
+                autoFocus
+                autoComplete='off'
+                className='Input'
+                value={password}
+                type='password'
+                placeholder='Please enter password'
+                onChange={e => this.setInputValue('password', e.target.value)}
               />
             </Form.Item>
             <Form.Item>
@@ -114,4 +133,4 @@ class Forget extends React.Component {
     )
   }
 }
-export default Forget
+export default PasswordChange

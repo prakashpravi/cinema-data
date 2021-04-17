@@ -1,7 +1,8 @@
 .main-login {
-    .ant-steps{
+    .ant-steps {
         display: none;
     }
+
     contain: content;
     // margin: 50px auto;
     // width: 80%;
@@ -69,11 +70,12 @@
 
 .main {
     // background: #f9f9f9;
-    height: 100vh; 
+    height: 100vh;
     display: flex;
-.ant-form-item{
-    margin: 6px !important;
-}
+    .ant-form-item {
+        margin: 6px !important;
+    }
+
     .login-form {
         overflow: auto;
         height: auto;
@@ -81,17 +83,19 @@
         min-width: 400px;
         margin: auto;
         background: #fff;
-        padding:6px 20px;
+        padding: 6px 20px;
         box-shadow: rgb(243, 243, 243) 1px 1px;
         border-radius: 12px;
         position: relative;
         border: 1px solid #f0f0f0;
         text-align: center;
+
         img {
             object-fit: scale-down;
             width: 36px;
             margin: auto;
         }
+
         .google-btn {
             width: 100%;
             margin: 12px 0px;

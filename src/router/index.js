@@ -9,14 +9,15 @@ class RouterApp extends React.Component {
       <Router>
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/forget" component={Forget} />
+          <Route path='/login' component={Login} />
+          <Route path='/forget' component={Forget} />
           <Route path='/signin' component={SignIn} />
           <Route path='/admin' component={Home} />
-          <Route path="/home" component={Home} />
-          <Route path="/notification" component={Home} />
-          <Route  path="/form" component={Home} />
-          <Route  path="/mymovie" component={Home} />
+          <Route path='/home' component={Home} />
+          <Route path='/notification' component={Home} />
+          <Route path='/passwordchange' component={Home} />
+          <Route path='/form' component={Home} />
+          <Route path='/mymovie' component={Home} />
         </Switch>
       </Router>
     )

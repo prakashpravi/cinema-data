@@ -6,6 +6,7 @@ const routes = {
     signIn:"/signin", 
     form:"/form",
     mymovie:"/mymovie",
-    notification:"/notification"
+    notification:"/notification",
+    passwordchange:"/passwordchange",
 } 
 export default routes;
