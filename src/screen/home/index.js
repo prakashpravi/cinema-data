@@ -24,7 +24,7 @@ class Home extends React.Component {
       return <Form {...this.props} />
     } else if (window.location.pathname === routes.admin) {
       return <Admin {...this.props} />
-    } else if (window.location.pathname === routes.HomeCom || '/') {
+    } else if (window.location.pathname === routes.HomeCom ) {
       return <HomeCom {...this.props} />
     }
   }

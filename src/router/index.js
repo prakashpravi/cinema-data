@@ -8,7 +8,7 @@ class RouterApp extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route exact path='/' component={Home} />
+          <Route exact path='/' component={Login} />
           <Route path='/login' component={Login} />
           <Route path='/forget' component={Forget} />
           <Route path='/signin' component={SignIn} />
