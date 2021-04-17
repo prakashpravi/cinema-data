@@ -2,8 +2,21 @@
     background: #F3F6FF;
     width: 100vw;
     height: 100vh;
-    padding: 70px 40px;
+    padding-top: 70px;
+    // padding: 70px 40px;
     overflow: auto;
+
+    .loader {
+        width: 99vw;
+        height: 88vh;
+        margin: auto;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        background-color: #fff;
+        overflow: hidden;
+    }
 
     .title {
         font-size: 26px;
@@ -21,6 +34,7 @@
         margin: auto;
         text-align: center;
         justify-content: center;
+        padding: 70px 40px;
     }
 
     .Input,
@@ -79,7 +93,8 @@
         letter-spacing: 0.5px;
         cursor: pointer;
     }
-    .pay_btn{
+
+    .pay_btn {
         margin-top: 20px;
         width: 120px !important;
         border-radius: 8px !important;
@@ -89,26 +104,29 @@
         background-color: #FF7620 !important;
         border: none;
         color: #fff;
-        :hover{
-        background-color: #FF7620 !important;
-        color: #fff;
+
+        :hover {
+            background-color: #FF7620 !important;
+            color: #fff;
         }
     }
 }
-.continue_pay_btn{
-        margin-top: 20px;
-        border-radius: 8px !important;
-        line-height: 0px;
-        font-size: 17px;
-        font-weight: 600;
-        background-color: #FF7620 !important;
-        border: none;
-        color: #fff;
-        width: 100%;
-        :hover{
+
+.continue_pay_btn {
+    margin-top: 20px;
+    border-radius: 8px !important;
+    line-height: 0px;
+    font-size: 17px;
+    font-weight: 600;
+    background-color: #FF7620 !important;
+    border: none;
+    color: #fff;
+    width: 100%;
+
+    :hover {
         background-color: #FF7620 !important;
         color: #fff !important;
-        }
+    }
 }
 
 @media (max-width: 426px) {

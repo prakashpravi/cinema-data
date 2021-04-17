@@ -9,7 +9,7 @@ import {
   Row,
   Col,
   DatePicker,
-  Upload
+  // Upload
 } from 'antd'
 import * as React from 'react'
 import moment from 'moment'
@@ -56,9 +56,16 @@ class SignIn extends React.Component {
     this.next()
   }
   handleSubmits = async () => {
-    const { movieImage } = this.state
-    if (!movieImage) {
-      message.error('Please upload the movie image', 5)
+    const { password, mobile_no } = this.state
+    // if (!movieImage) {
+    //   message.error('Please upload the movie image', 5)
+    //   return false
+    // }
+    if (mobile_no?.length !== 10) {
+      message.error('Please enter valid mobile number', 5)
+      return false
+    } else if (password?.length < 8) {
+      message.error('Please enter the password min length 8', 5)
       return false
     }
     await message.loading('Loading....', 5)
@@ -75,14 +82,14 @@ class SignIn extends React.Component {
         mobile_no: this.state.mobile_no,
         first_name: this.state.first_name,
         last_name: this.state.last_name,
-        profile_img: this.state.movieImage
+        profile_img: ''
       })
     })
       .then(data => {
         return data.json()
       })
       .then(response => {
-        if (response.data) {
+        if (response.info === 'user create successfully') {
           notification.success({
             message: 'Success',
             description: 'Your account created has been successful!'
@@ -95,7 +102,7 @@ class SignIn extends React.Component {
         }
       })
       .catch(error => {
-        message.error(error, 5)
+        message.error('Faild to Sign In', 5)
       })
   }
   handleSubmitSigin = async () => {
@@ -145,7 +152,7 @@ class SignIn extends React.Component {
       newpassword,
       password,
       birthday,
-      fileList
+      // fileList
     } = this.state
     return (
       <div className='main-login'>
@@ -178,7 +185,7 @@ class SignIn extends React.Component {
                               Sign Up
                             </Title>
                           </span>
-                          <Upload
+                          {/* <Upload
                             onChange={e => this.handleChange(e)}
                             action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
                             fileList={fileList}
@@ -198,8 +205,8 @@ class SignIn extends React.Component {
                             >
                               + Upload
                             </span>
-                          </Upload>
-                          <br />
+                          </Upload> */}
+                          {/* <br /> */}
                           <Form.Item
                             name='first_name'
                             rules={[
@@ -233,7 +240,6 @@ class SignIn extends React.Component {
                             ]}
                           >
                             <Input
-                              autoFocus
                               autoComplete='off'
                               className='Input'
                               onChange={e =>

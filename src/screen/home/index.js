@@ -5,13 +5,19 @@ import Header from '../../components/header/index'
 import HomeCom from '../../components/home'
 import Admin from '../../components/admin'
 import Form from '../../components/form/index'
+import Mymovie from '../../components/mymoive/index'
+import Notification from '../../components/notification/index'
 class Home extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
   }
   Content = () => {
-    if (window.location.pathname === routes.form) {
+    if (window.location.pathname === routes.notification) {
+      return <Notification {...this.props} />
+    } else if (window.location.pathname === routes.mymovie) {
+      return <Mymovie {...this.props} />
+    } else if (window.location.pathname === routes.form) {
       return <Form {...this.props} />
     } else if (window.location.pathname === routes.admin) {
       return <Admin {...this.props} />

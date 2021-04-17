@@ -69,14 +69,19 @@
 
 .main {
     // background: #f9f9f9;
-    height: 100vh;
+    height: 100vh; 
     display: flex;
-
+.ant-form-item{
+    margin: 6px !important;
+}
     .login-form {
+        overflow: auto;
+        height: auto;
+        width: min-content;
         min-width: 400px;
         margin: auto;
         background: #fff;
-        padding: 20px;
+        padding:6px 20px;
         box-shadow: rgb(243, 243, 243) 1px 1px;
         border-radius: 12px;
         position: relative;

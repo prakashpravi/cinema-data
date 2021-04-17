@@ -4,6 +4,8 @@ const routes = {
     forget:"/forget",
     HomeCom:"/home", 
     signIn:"/signin", 
-    form:"/form"
+    form:"/form",
+    mymovie:"/mymovie",
+    notification:"/notification"
 } 
 export default routes;

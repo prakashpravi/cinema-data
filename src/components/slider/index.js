@@ -10,16 +10,17 @@ export default class AutoPlay extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true,
-      speed: 2000,
-      autoplaySpeed: 2000
+      speed: 1000,
+      autoplaySpeed: 2000,
+      arrows:false,
     }
     return (
       <div className='main_carousel'>
         <Slider className='sliders' {...settings}>
           {[
-            'https://wallpaperaccess.com/full/82910.jpg',
-            'https://www.epw.in/system/files/di_images/2020/02/26/xjoker-main.png.pagespeed.ic.auRXns3Ltd.webp',
-            'https://www.desktopbackground.org/download/o/2010/11/08/107714_batman-joker-cartoon-android-comics-1920x1080-hd-wallpapers-and_1920x1080_h.jpg'
+            'https://www.filmibeat.com/wimgm/1366x70/desktop/2020/01/master_3.jpg',
+            'https://1.bp.blogspot.com/-di4zJIry4tk/YBbtymPuG4I/AAAAAAAArI4/0OKS8xN3EqA_inm1AG8-93d5wMf6H1gzwCLcBGAsYHQ/s745/Karnan%2BMovie%2BImages%252C%2BHD%2BWallpapers.JPG',
+            'https://www.hdwallpapers.in/download/actor_karthi_hd_sulthan-HD.jpg'
           ].map(v => {
             return (
               <div className='sliders'>

@@ -4,7 +4,17 @@
     text-align: center;
     background-color: #F3F6FF;
     padding: 20px 0px;
-
+    .loader {
+        width: 99vw;
+        height: 88vh;
+        margin: auto;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        background-color: #fff;
+        overflow: hidden;
+    }
     .filed {
         margin: 10px 0px;
     }

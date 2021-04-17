@@ -1,0 +1,52 @@
+.notification_main {
+  margin-top: 70px;
+  width: 99vw;
+  padding: 30px;
+  background: #F3F6FF;
+  height: 100vh;
+}
+
+.notification_main .m_title {
+  font-size: 24px;
+}
+
+.notification_main .cards {
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  height: 80px;
+  margin: 10px 0px;
+}
+
+.notification_main .cards .dis {
+  color: green;
+}
+
+.notification_main .cards .ant-avatar {
+  margin-top: 8px;
+}
+
+.notification_main .cards .ant-list-item-meta-description {
+  width: 90%;
+  overflow: hidden;
+  height: 24px;
+}
+
+.loader {
+  width: 99vw;
+  height: 88vh;
+  margin: auto;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #fff;
+  overflow: hidden;
+}
+/*# sourceMappingURL=styled.css.map */

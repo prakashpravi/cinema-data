@@ -7,22 +7,35 @@
           box-shadow: #f3f3f3 1px 1px;
   border-radius: 12px;
   border: 1px solid #f0f0f0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100px;
+  overflow: hidden;
+  margin-bottom: 20px;
 }
 
 .linelist_main .ant-card .ant-card-cover {
   border-radius: 12px;
   overflow: hidden;
-  height: 200px;
+  height: 100px;
 }
 
 .linelist_main .ant-card .ant-card-cover img {
   height: 100%;
+  width: 100px;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.linelist_main .ant-card .ant-card-cover .ant-card-body {
+.linelist_main .ant-card .ant-card-body {
   padding: 12px;
+  margin: auto 0px;
+}
+
+.linelist_main .ant-card .ant-card-body .ant-card-meta-title {
+  width: 180px;
+  text-align: left;
 }
 
 .modal_title {

@@ -2,8 +2,26 @@
   background: #F3F6FF;
   width: 100vw;
   height: 100vh;
-  padding: 70px 40px;
+  padding-top: 70px;
   overflow: auto;
+}
+
+.drivermain .loader {
+  width: 99vw;
+  height: 88vh;
+  margin: auto;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #fff;
+  overflow: hidden;
 }
 
 .drivermain .title {
@@ -24,6 +42,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  padding: 70px 40px;
 }
 
 .drivermain .Input,

@@ -1,0 +1,53 @@
+.mymovie_main {
+    margin-top: 70px;
+    width: 99vw;
+    padding: 30px;
+    background: #F3F6FF;
+    height: 100vh;
+
+    .m_title {
+        font-size: 24px;
+    }
+
+    .cards {
+        background: #fff;
+        border-radius: 10px;
+        padding: 10px;
+        height: 80px;
+        margin: 10px 0px;
+        overflow: hidden;
+        .dis {
+            color: green;
+        }
+
+        .ant-avatar {
+            margin-top: 8px;
+        }
+
+        .ant-list-item-meta-description {
+            width: 90%;
+            overflow: hidden;
+            height: 24px;
+        }
+    }
+
+
+}
+
+.loader {
+    width: 99vw;
+    height: 88vh;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #fff;
+    overflow: hidden;
+}
+@media (max-width: 426px) {
+    .ant-btn-dangerous.ant-btn-primary {
+        font-size: 10px;
+        padding: 0;
+    }
+}

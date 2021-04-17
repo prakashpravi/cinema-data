@@ -76,11 +76,20 @@
   display: flex;
 }
 
+.main .ant-form-item {
+  margin: 6px !important;
+}
+
 .main .login-form {
+  overflow: auto;
+  height: auto;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
   min-width: 400px;
   margin: auto;
   background: #fff;
-  padding: 20px;
+  padding: 6px 20px;
   -webkit-box-shadow: #f3f3f3 1px 1px;
           box-shadow: #f3f3f3 1px 1px;
   border-radius: 12px;

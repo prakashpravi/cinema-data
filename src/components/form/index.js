@@ -8,7 +8,9 @@ import {
   Card,
   Button,
   Upload,
-  message
+  message,
+  notification,
+  Spin
 } from 'antd'
 import * as React from 'react'
 import './form.css'
@@ -31,10 +33,12 @@ class Forms extends React.Component {
       validity: null,
       description: null,
       movieImage: null,
-      fileList: []
+      fileList: [],
+      loader: true
     }
   }
   componentDidMount = async () => {
+    await setTimeout(() => this.setState({ loader: false }), 2000)
     this.props.client
       .query({
         query: userProfileById(localStorage.getItem('user_id'))
@@ -51,7 +55,7 @@ class Forms extends React.Component {
         }
       })
       .catch(err => {
-        console.log('err:', err)
+        message.error('Faild to fetch data', 5)
       })
   }
   setInputValue = (name, val) => {
@@ -66,7 +70,7 @@ class Forms extends React.Component {
       validity: value
     })
   }
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const { moviename, description, validity, movieImage } = this.state
     if (!movieImage) {
       message.error('Please upload the movie image', 5)
@@ -77,9 +81,9 @@ class Forms extends React.Component {
       'price $500 (5 year of validity)': '500',
       'price $1000 (10 year of validity)': '1000'
     }
+    await message.loading('Loading....', 5)
     this.props.client
       .mutate({
-        variables: {},
         mutation: createMovieTitle(
           moviename,
           data[validity],
@@ -91,10 +95,16 @@ class Forms extends React.Component {
         )
       })
       .then(res => {
-        console.log('err:', res)
+        console.log(res)
+        notification.success({
+          message: 'Success',
+          description: 'Your details has been successful!'
+        })
+        this.setState({ ...this.state })
+        this.props.history.push('/home')
       })
       .catch(err => {
-        console.log('err:', err)
+        message.error('Faild to fetch data', 5)
       })
   }
   getBase64 = (img, callback) => {
@@ -130,198 +140,208 @@ class Forms extends React.Component {
       moviename,
       validity,
       description,
-      fileList
+      fileList,
+      loader
     } = this.state
     return (
       <div className='main-form'>
         <br />
         <br />
-        <Card title='Personal Details' className='cards'>
-          <Row gutter={16}>
-            <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
-              <Title level={5} className='titles'>
-                User Name
-              </Title>
-              <Input
-                style={{ width: '96%' }}
-                placeholder='User Name'
-                className='filed'
-                disabled
-                value={name}
-                size='large'
-              />
-            </Col>
-            <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
-              <Title level={5} className='titles'>
-                Date of birth
-              </Title>
-              <Input
-                style={{ width: '96%' }}
-                placeholder='Please input'
-                className='filed'
-                disabled
-                size='large'
-                value={birthday}
-              />
-            </Col>
-            <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
-              <Title level={5} className='titles'>
-                Email
-              </Title>
-              <Input
-                style={{ width: '96%' }}
-                placeholder='Please input'
-                className='filed'
-                disabled
-                size='large'
-                value={email}
-              />
-            </Col>
-            <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
-              <Title level={5} className='titles'>
-                Mobile Number
-              </Title>
-              <Input
-                style={{ width: '96%' }}
-                placeholder='Please input'
-                className='filed'
-                disabled
-                size='large'
-                value={mobile_no}
-              />
-            </Col>
-          </Row>
-        </Card>
-
-        <Card title='Movie Details' className='cards'>
-          <Form
-            name='normal_login'
-            className='login-form'
-            onFinish={() => this.handleSubmit()}
-          >
-            <Row gutter={16}>
-              <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
-                <Title level={5} className='titles'>
-                  Movie Image
-                </Title>
-                <Upload
-                  onChange={e => this.handleChange(e)}
-                  action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
-                  fileList={fileList}
-                  multiple={false}
-                  listType='picture-card'
-                  onRemove={() =>
-                    this.setState({
-                      fileList: [],
-                      movieImage: null
-                    })
-                  }
-                >
-                  + Upload
-                </Upload>
-              </Col>
-              <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
-                <Title level={5} className='titles'>
-                  Movie Name
-                </Title>
-
-                <Form.Item
-                  name='moviename'
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please enter your movie name!'
-                    }
-                  ]}
-                >
+        {loader && (
+          <div className='loader'>
+            <Spin size='large' />
+          </div>
+        )}
+        {!loader && (
+          <>
+            {' '}
+            <Card title='Personal Details' className='cards'>
+              <Row gutter={16}>
+                <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
+                  <Title level={5} className='titles'>
+                    User Name
+                  </Title>
                   <Input
-                    autoFocus
                     style={{ width: '96%' }}
-                    autoComplete='off'
-                    className='Input'
-                    onChange={e =>
-                      this.setInputValue('moviename', e.target.value)
-                    }
+                    placeholder='User Name'
+                    className='filed'
+                    disabled
+                    value={name}
                     size='large'
-                    value={moviename}
-                    placeholder='Movie Name'
                   />
-                </Form.Item>
-              </Col>
-              <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
-                <Title level={5} className='titles'>
-                  Choose your plan
-                </Title>
-                <Form.Item
-                  name='validity'
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please select your validity!'
-                    }
-                  ]}
-                >
-                  <Select
-                    showSearch
-                    allowClear
+                </Col>
+                <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
+                  <Title level={5} className='titles'>
+                    Date of birth
+                  </Title>
+                  <Input
                     style={{ width: '96%' }}
-                    placeholder='Choose yor plan'
+                    placeholder='Please input'
+                    className='filed'
+                    disabled
                     size='large'
-                    onChange={this.onChange}
-                    // onFocus={onFocus}
-                    // onBlur={onBlur}
-                    // onSearch={onSearch}
-                    value={validity}
-                    filterOption={(input, option) =>
-                      option.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    <Option value='price $100 (1 year of validity)'>
-                      price $100 (1 year of validity)
-                    </Option>
-                    <Option value='price $500 (5 year of validity)'>
-                      price $500 (5 year of validity)
-                    </Option>
-                    <Option value='price $1000 (10 year of validity)'>
-                      price $1000 (10 year of validity)
-                    </Option>
-                  </Select>
-                </Form.Item>
-              </Col>
-              <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
-                <Title level={5} className='titles'>
-                  Enter your description
-                </Title>
-                <Form.Item
-                  name='description'
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please enter your description!'
-                    }
-                  ]}
-                >
-                  <Input.TextArea
-                    style={{ width: '96%' }}
-                    onChange={e =>
-                      this.setInputValue('description', e.target.value)
-                    }
-                    value={description}
+                    value={birthday}
                   />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Button
-              type='primary'
-              htmlType='submit'
-              className='login-form-button'
-            >
-              Save
-            </Button>
-          </Form>
-        </Card>
+                </Col>
+                <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
+                  <Title level={5} className='titles'>
+                    Email
+                  </Title>
+                  <Input
+                    style={{ width: '96%' }}
+                    placeholder='Please input'
+                    className='filed'
+                    disabled
+                    size='large'
+                    value={email}
+                  />
+                </Col>
+                <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
+                  <Title level={5} className='titles'>
+                    Mobile Number
+                  </Title>
+                  <Input
+                    style={{ width: '96%' }}
+                    placeholder='Please input'
+                    className='filed'
+                    disabled
+                    size='large'
+                    value={mobile_no}
+                  />
+                </Col>
+              </Row>
+            </Card>
+            <Card title='Movie Details' className='cards'>
+              <Form
+                name='normal_login'
+                className='login-form'
+                onFinish={() => this.handleSubmit()}
+              >
+                <Row gutter={16}>
+                  <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
+                    <Title level={5} className='titles'>
+                      Movie Image
+                    </Title>
+                    <Upload
+                      onChange={e => this.handleChange(e)}
+                      action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
+                      fileList={fileList}
+                      multiple={false}
+                      listType='picture-card'
+                      onRemove={() =>
+                        this.setState({
+                          fileList: [],
+                          movieImage: null
+                        })
+                      }
+                    >
+                      + Upload
+                    </Upload>
+                  </Col>
+                  <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
+                    <Title level={5} className='titles'>
+                      Movie Name
+                    </Title>
+
+                    <Form.Item
+                      name='moviename'
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please enter your movie name!'
+                        }
+                      ]}
+                    >
+                      <Input
+                        autoFocus
+                        style={{ width: '96%' }}
+                        autoComplete='off'
+                        className='Input'
+                        onChange={e =>
+                          this.setInputValue('moviename', e.target.value)
+                        }
+                        size='large'
+                        value={moviename}
+                        placeholder='Movie Name'
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
+                    <Title level={5} className='titles'>
+                      Choose your plan
+                    </Title>
+                    <Form.Item
+                      name='validity'
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please select your validity!'
+                        }
+                      ]}
+                    >
+                      <Select
+                        showSearch
+                        allowClear
+                        style={{ width: '96%' }}
+                        placeholder='Choose yor plan'
+                        size='large'
+                        onChange={this.onChange}
+                        // onFocus={onFocus}
+                        // onBlur={onBlur}
+                        // onSearch={onSearch}
+                        value={validity}
+                        filterOption={(input, option) =>
+                          option.children
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0
+                        }
+                      >
+                        <Option value='price $100 (1 year of validity)'>
+                          price $100 (1 year of validity)
+                        </Option>
+                        <Option value='price $500 (5 year of validity)'>
+                          price $500 (5 year of validity)
+                        </Option>
+                        <Option value='price $1000 (10 year of validity)'>
+                          price $1000 (10 year of validity)
+                        </Option>
+                      </Select>
+                    </Form.Item>
+                  </Col>
+                  <Col xs={{ span: 24 }} sm={{ span: 24 }} lg={{ span: 12 }}>
+                    <Title level={5} className='titles'>
+                      Enter your description
+                    </Title>
+                    <Form.Item
+                      name='description'
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please enter your description!'
+                        }
+                      ]}
+                    >
+                      <Input.TextArea
+                        style={{ width: '96%' }}
+                        onChange={e =>
+                          this.setInputValue('description', e.target.value)
+                        }
+                        value={description}
+                      />
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Button
+                  type='primary'
+                  htmlType='submit'
+                  className='login-form-button'
+                >
+                  Proceed to Buynow
+                </Button>
+              </Form>
+            </Card>
+          </>
+        )}
       </div>
     )
   }

@@ -9,13 +9,20 @@ import {
   Input,
   Button,
   Form,
-  message
+  message,
+  notification,
+  Badge
 } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
 import './styled.css'
 import moment from 'moment'
 import { withApollo } from 'react-apollo'
-import { userProfileById, updateUserProfileById } from '../../hooks/query'
+import {
+  userProfileById,
+  updateUserProfileById,
+  allMoviesTitles
+} from '../../hooks/query'
+
 class Header extends React.Component {
   constructor (props) {
     super(props)
@@ -28,7 +35,8 @@ class Header extends React.Component {
       birthday: null,
       fileList: [],
       movieImage: null,
-      id: null
+      id: null,
+      listdata: []
     }
   }
   componentDidMount = async () => {
@@ -46,14 +54,21 @@ class Header extends React.Component {
             birthday: moment(data?.birthday).format('YYYY-MM-DD'),
             email: data?.email,
             movieImage: data?.profileImg,
-            fileList: [
-              {
-                uid: '-1',
-                status: 'done',
-                url: data?.profileImg
-              }
-            ],
             id: data?.id
+          })
+        }
+      })
+      .catch(err => {
+        console.log('err:', err)
+      })
+    this.props.client
+      .query({
+        query: allMoviesTitles
+      })
+      .then(response => {
+        if (response?.data) {
+          this.setState({
+            listdata: response?.data?.allMovieTitles?.nodes
           })
         }
       })
@@ -103,7 +118,7 @@ class Header extends React.Component {
     })
   }
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const {
       firstName,
       lastName,
@@ -118,6 +133,7 @@ class Header extends React.Component {
       return false
     }
 
+    await message.loading('Loading....', 5)
     this.props.client
       .mutate({
         variables: {},
@@ -132,10 +148,14 @@ class Header extends React.Component {
         )
       })
       .then(res => {
-        console.log('err:', res)
+        notification.success({
+          message: 'Success',
+          description: 'Your profile has been updated!'
+        })
+        console.log('res:', res)
       })
       .catch(err => {
-        console.log('err:', err)
+        message.error(err, 5)
       })
   }
   render () {
@@ -146,8 +166,10 @@ class Header extends React.Component {
       email,
       mobile_no,
       birthday,
-      fileList
+      fileList,
+      listdata
     } = this.state
+    const location = window.location.pathname
     return (
       <div className='headermain'>
         <Drawer
@@ -171,7 +193,7 @@ class Header extends React.Component {
                 })
               }
             >
-              + Upload
+              Image Upload
             </Upload>
             <Form name='normal_login' onFinish={() => this.handleSubmit()}>
               <br />
@@ -254,9 +276,9 @@ class Header extends React.Component {
             <Breadcrumb separator={false} className='Breadcrumb'>
               <Breadcrumb.Item className='home'>
                 <img
+                  className='imgss'
                   alt='img'
                   style={{
-                    width: '38px',
                     position: 'absolute',
                     marginTop: -8
                   }}
@@ -266,13 +288,29 @@ class Header extends React.Component {
 
               <div className='center_of'>
                 <Breadcrumb.Item
-                  className='home active'
+                  className={`home ${location === '/home' && 'active'}`}
                   onClick={() => this.props.history.push('/home')}
                 >
                   Home
                 </Breadcrumb.Item>
-                {/* <Breadcrumb.Item className='home'>Prices</Breadcrumb.Item> */}
-                <Breadcrumb.Item className='home'>About</Breadcrumb.Item>
+                <Breadcrumb.Item
+                  className={`home ${location === '/mymovie' && 'active'}`}
+                  onClick={() => this.props.history.push('/mymovie')}
+                >
+                  My movies
+                </Breadcrumb.Item>
+                <Breadcrumb.Item
+                  className={`home ${location === '/notification' && 'active'}`}
+                  onClick={() => this.props.history.push('/notification')}
+                >
+                  <Badge
+                    size='small'
+                    count={listdata?.length}
+                    style={{ backgroundColor: '#52c41a', color: '#fff' }}
+                  >
+                    Notification
+                  </Badge>
+                </Breadcrumb.Item>
               </div>
             </Breadcrumb>
           }

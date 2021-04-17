@@ -3,6 +3,14 @@
     width: 100vw;
     z-index: 10;
 
+    .ant-badge {
+        color: #fff;
+    }
+
+    .ant-badge-multiple-words {
+        box-shadow: none;
+    }
+
     .ant-page-header {
         background-color: #300e6c !important;
         color: #fff !important;
@@ -27,15 +35,15 @@
                     margin: auto;
                 }
 
-                span {
-                    margin: 0px 20px;
+                .home  {
+                    margin: 4px 20px;
 
                 }
 
                 .ant-breadcrumb-separator {
                     display: none;
                 }
-            }
+            } 
         }
     }
 
@@ -66,11 +74,15 @@
         margin-right: 8px;
         cursor: pointer;
     }
+
+    .imgss {
+        width: 38px;
+    }
 }
 
 @media (max-width: 426px) {
     .headermain .ant-page-header-heading-left .ant-page-header-heading-title .Breadcrumb span {
-        margin: 0px 6px;
+        margin: 4px 6px;
     }
 
     .ant-page-header-compact .ant-page-header-heading {
@@ -85,5 +97,20 @@
 
     .headermain {
         width: 100vw;
+    }
+
+    .headermain .Breadcrumb .home,
+    .ant-badge {
+        font-size: 11px;
+    }
+
+    .ant-badge-count {
+        font-size: 9px;
+        line-height: 14px;
+        height: 14px;
+    }
+
+    .headermain .imgss {
+        width: 27px;
     }
 }
