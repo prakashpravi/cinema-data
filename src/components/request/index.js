@@ -43,7 +43,7 @@ class Request extends React.Component {
         {!loader && (
           <div className='request_main'>
             <Title level={5} className='m_title'>
-              Your Movies
+              Request's
             </Title>
             {listdata?.length === 0 && <Empty />}
             {listdata?.map(v => {
@@ -61,9 +61,7 @@ class Request extends React.Component {
                     description={v?.description}
                   />
                   <div className='dis'>
-                    <Button type='primary'>
-                      Accpect
-                    </Button>&nbsp;
+                    <Button type='primary'>Accpect</Button>&nbsp;
                     <Button type='primary' danger>
                       Cancel
                     </Button>

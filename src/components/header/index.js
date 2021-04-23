@@ -334,15 +334,15 @@ class Header extends React.Component {
                   </Badge>
                 </Breadcrumb.Item>
 
-                {/* {localStorage.getItem('admin') && ( */}
-                <Breadcrumb.Item
-                  className={`home mb sv ${location === '/request' &&
-                    'active'}`}
-                  onClick={() => (window.location.href = '/request')}
-                >
-                  {'Request'}
-                </Breadcrumb.Item>
-                {/* )} */}
+                {localStorage.getItem('admin') && (
+                  <Breadcrumb.Item
+                    className={`home mb sv ${location === '/request' &&
+                      'active'}`}
+                    onClick={() => (window.location.href = '/request')}
+                  >
+                    {'Request'}
+                  </Breadcrumb.Item>
+                )}
               </div>
             </Breadcrumb>
           }
@@ -393,7 +393,7 @@ class Header extends React.Component {
                   cursor: 'pointer'
                 }}
               >
-                More
+                More▾
                 {/* <DownOutlined
                   style={{
                     fontSize: '15px',
