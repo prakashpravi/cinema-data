@@ -1,6 +1,7 @@
 import gql from "graphql-tag";
-var allMoviesTitles = gql `query MyQuery {
-  allMovieTitles {
+
+export const requestAll = gql `query MyQuery {
+  allMovieTitles (filter: {isPurchase: {equalTo: false}}){
     nodes {
     name
     id
@@ -8,6 +9,37 @@ var allMoviesTitles = gql `query MyQuery {
     price
     movieImage
     description
+    isPurchase
+    }
+  }
+}`;
+export const myMoviesTitles = (id) => {
+  return gql `query MyQuery {
+  allMovieTitles(filter: {id: {equalTo: "${id}"}, isPurchase: {equalTo: true}}) {
+    nodes {
+      name
+      id
+      description
+      createdAt
+      price
+      movieImage
+      isPurchase
+    }
+  }
+}
+`
+};
+
+var allMoviesTitles = gql `query MyQuery {
+  allMovieTitles (filter: {isPurchase: {equalTo: true}}){
+    nodes {
+    name
+    id
+    createdAt
+    price
+    movieImage
+    description
+    isPurchase
     }
   }
 }`;
@@ -38,7 +70,7 @@ export const createMovieTitle = (name, price, description, movieImage, id, user_
             description: "${description}"
             movieImage: "${movieImage}"
             id: "${id}"
-            isPurchase: false
+            isPurchase: true
             updatedBy: "${user_id}"
             createdBy: "${user_id}"
             createdAt: "${date}"

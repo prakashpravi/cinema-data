@@ -18,6 +18,7 @@ class RouterApp extends React.Component {
           <Route path='/passwordchange' component={Home} />
           <Route path='/form' component={Home} />
           <Route path='/mymovie' component={Home} />
+          <Route path='/request' component={Home} />
         </Switch>
       </Router>
     )

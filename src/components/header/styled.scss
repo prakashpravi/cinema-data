@@ -32,18 +32,31 @@
                 display: flex;
 
                 .center_of {
+                    display: flex;
                     margin: auto;
-                }
 
-                .home  {
-                    margin: 4px 20px;
+                    .home {
+                        margin: 4px 20px;
 
+                    }
+
+                    .mb {
+                        display: flex;
+                    }
+
+                    .sv {
+                        margin-top: -1px !important;
+                    }
+
+                    .lg {
+                        margin-top: 7px !important;
+                    }
                 }
 
                 .ant-breadcrumb-separator {
                     display: none;
                 }
-            } 
+            }
         }
     }
 
@@ -78,9 +91,18 @@
     .imgss {
         width: 38px;
     }
+
+}
+
+.hinmbl {
+    display: none !important;
 }
 
 @media (max-width: 426px) {
+    .hinmbl {
+        display: block !important;
+    }
+
     .headermain .ant-page-header-heading-left .ant-page-header-heading-title .Breadcrumb span {
         margin: 4px 6px;
     }
@@ -97,11 +119,26 @@
 
     .headermain {
         width: 100vw;
+
+        .ant-page-header-heading-left {
+
+            .ant-page-header-heading-title {
+
+
+                .Breadcrumb {
+
+                    .mb {
+                        display: none !important;
+                    }
+
+                }
+            }
+        }
     }
 
     .headermain .Breadcrumb .home,
     .ant-badge {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     .ant-badge-count {

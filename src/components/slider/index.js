@@ -12,15 +12,15 @@ export default class AutoPlay extends Component {
       autoplay: true,
       speed: 1000,
       autoplaySpeed: 2000,
-      arrows:false,
+      arrows: false
     }
     return (
       <div className='main_carousel'>
         <Slider className='sliders' {...settings}>
           {[
-            'https://www.filmibeat.com/wimgm/1366x70/desktop/2020/01/master_3.jpg',
-            'https://1.bp.blogspot.com/-di4zJIry4tk/YBbtymPuG4I/AAAAAAAArI4/0OKS8xN3EqA_inm1AG8-93d5wMf6H1gzwCLcBGAsYHQ/s745/Karnan%2BMovie%2BImages%252C%2BHD%2BWallpapers.JPG',
-            'https://www.hdwallpapers.in/download/actor_karthi_hd_sulthan-HD.jpg'
+            'https://moviegalleri.net/wp-content/gallery/sultan-images/Sultan-Movie-Images-HD-Karthi-Rashmika-Mandanna-35c2f2c.jpg',
+            'https://moviegalleri.net/wp-content/gallery/master-hd-images/Master-Movie-HD-Images-Vijay-Sethupathi-Malavika-Mohanan-814b98d.jpg',
+            'https://moviegalleri.net/wp-content/gallery/karnan-images-hd/Dhanush-Karnan-Movie-Images-HD-Photos-Pics-6d71a1a.jpg' // 'https://www.indiannewslive.com/movies/wp-content/uploads/2021/03/Master-New-2021-1.jpg',
           ].map(v => {
             return (
               <div className='sliders'>

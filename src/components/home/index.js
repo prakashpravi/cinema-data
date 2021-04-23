@@ -39,7 +39,7 @@ class HomeCom extends React.Component {
             return v
           })
           this.setState({
-            listdata: data,
+            listdata: data
           })
         }
       })

@@ -61,7 +61,8 @@ class Login extends React.Component {
         }
       })
       .catch(error => {
-        message.error(error, 5)
+          message.error('Faild to login', 5)
+        console.log(error, 5)
       })
   }
   render () {

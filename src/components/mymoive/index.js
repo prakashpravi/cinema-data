@@ -1,8 +1,8 @@
-import { Spin, List, Avatar, Typography, Button } from 'antd'
+import { Spin, List, Avatar, Typography, Empty, Button } from 'antd'
 import * as React from 'react'
 import './styled.css'
 import { withApollo } from 'react-apollo'
-import { allMoviesTitles } from '../../hooks/query'
+import { allMoviesTitles, myMoviesTitles } from '../../hooks/query'
 import moment from 'moment'
 const { Title } = Typography
 class Mymovie extends React.Component {
@@ -17,7 +17,9 @@ class Mymovie extends React.Component {
     await setTimeout(() => this.setState({ loader: false }), 2000)
     this.props.client
       .query({
-        query: allMoviesTitles
+        query: localStorage.getItem('admin')
+          ? allMoviesTitles
+          : myMoviesTitles(localStorage.getItem('user_id'))
       })
       .then(response => {
         if (response?.data) {
@@ -45,6 +47,7 @@ class Mymovie extends React.Component {
             <Title level={5} className='m_title'>
               Your Movies
             </Title>
+            {listdata?.length === 0 && <Empty />}
             {listdata?.map(v => {
               return (
                 <List.Item className='cards'>
