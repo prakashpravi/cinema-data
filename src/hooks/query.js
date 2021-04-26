@@ -3,19 +3,38 @@ import gql from "graphql-tag";
 export const requestAll = gql `query MyQuery {
   allMovieTitles (filter: {isPurchase: {equalTo: false}}){
     nodes {
-    name
-    id
-    createdAt
-    price
-    movieImage
-    description
-    isPurchase
+      nodeId
+      createdBy
+      createdAt
+      description
+      id
+      isActive
+      isPurchase
+      movieImage
+      name
+      price
+      updatedAt
+      updatedBy
     }
   }
 }`;
+
+export const requestAccpect = (id) => {
+  return gql `mutation MyMutation {
+    updateMovieTitleById(
+      input: {
+        id: "${id}"
+        movieTitlePatch: { isPurchase: true }
+      }
+    ) {
+      clientMutationId
+    }
+  }
+  `
+};
 export const myMoviesTitles = (id) => {
   return gql `query MyQuery {
-  allMovieTitles(filter: {id: {equalTo: "${id}"}, isPurchase: {equalTo: true}}) {
+  allMovieTitles(filter: {createdBy: {equalTo: "${id}"}, isPurchase: {equalTo: true}}) {
     nodes {
       name
       id

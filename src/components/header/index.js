@@ -13,7 +13,6 @@ import {
   notification,
   Badge
 } from 'antd'
-// import { DownOutlined } from '@ant-design/icons'
 import './styled.css'
 import moment from 'moment'
 import { withApollo } from 'react-apollo'
@@ -300,30 +299,21 @@ class Header extends React.Component {
               <div className='center_of'>
                 <Breadcrumb.Item
                   className={`home ${location === '/home' && 'active'}`}
-                  onClick={
-                    () => (window.location.href = '/home')
-                    //  this.props.history.push('/home')
-                  }
+                  onClick={() => (window.location.href = '/home')}
                 >
                   Home
                 </Breadcrumb.Item>
                 <Breadcrumb.Item
                   className={`home mb sv ${location === '/mymovie' &&
                     'active'}`}
-                  onClick={
-                    () => (window.location.href = '/mymovie')
-                    // this.props.history.push('/mymovie')
-                  }
+                  onClick={() => (window.location.href = '/mymovie')}
                 >
                   {localStorage.getItem('admin') ? "Data's" : ' My movies'}
                 </Breadcrumb.Item>
                 <Breadcrumb.Item
                   className={`home mb lg ${location === '/notification' &&
                     'active'}`}
-                  onClick={
-                    () => (window.location.href = '/notification')
-                    // this.props.history.push('/notification')
-                  }
+                  onClick={() => (window.location.href = '/notification')}
                 >
                   <Badge
                     size='small'
@@ -394,18 +384,7 @@ class Header extends React.Component {
                 }}
               >
                 More▾
-                {/* <DownOutlined
-                  style={{
-                    fontSize: '15px',
-                    margin: '4px 0px 0px 2px',
-                    position: 'absolute'
-                  }}
-                /> */}
               </span>
-              {/* <Avatar
-                className='avatar_icon'
-                src='https://i.pinimg.com/564x/95/79/c1/9579c179f04e0f7c52cb3932ec916910.jpg'
-              /> */}
             </Dropdown>
           ]}
         />

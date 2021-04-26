@@ -2,7 +2,7 @@ import { Spin, List, Avatar, Typography, Empty, Button } from 'antd'
 import * as React from 'react'
 import './styled.css'
 import { withApollo } from 'react-apollo'
-import { requestAll } from '../../hooks/query'
+import { requestAll, requestAccpect } from '../../hooks/query'
 import moment from 'moment'
 const { Title } = Typography
 class Request extends React.Component {
@@ -25,6 +25,24 @@ class Request extends React.Component {
           this.setState({
             listdata: data
           })
+        }
+      })
+      .catch(err => {
+        console.log('err:', err)
+      })
+  }
+  accpectAll = async val => {
+    await this.props.client
+      .mutate({
+        mutation: requestAccpect(val.id)
+      })
+      .then(response => {
+        if (response?.data) {
+          const data = response?.data?.allMovieTitles?.nodes
+          this.setState({
+            listdata: data
+          })
+          window.location.reload()
         }
       })
       .catch(err => {
@@ -61,7 +79,10 @@ class Request extends React.Component {
                     description={v?.description}
                   />
                   <div className='dis'>
-                    <Button type='primary'>Accpect</Button>&nbsp;
+                    <Button type='primary' onClick={() => this.accpectAll(v)}>
+                      Accpect
+                    </Button>
+                    &nbsp;
                     <Button type='primary' danger>
                       Cancel
                     </Button>
