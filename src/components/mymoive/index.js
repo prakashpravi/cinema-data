@@ -6,7 +6,8 @@ import {
   Empty,
   Button,
   message,
-  notification
+  notification,
+  Table
 } from 'antd'
 import * as React from 'react'
 import './styled.css'
@@ -124,6 +125,23 @@ class Mymovie extends React.Component {
   }
   render () {
     const { loader, listdata, data } = this.state
+    const columns = [
+      {
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name'
+      },
+      {
+        title: 'Description',
+        dataIndex: 'description',
+        key: 'description'
+      },
+      {
+        title: 'CreatedAt',
+        dataIndex: 'createdAt',
+        key: 'createdAt'
+      }
+    ]
     return (
       <div>
         {loader && (
@@ -190,28 +208,34 @@ class Mymovie extends React.Component {
 
             {listdata?.length === 0 && <Empty />}
 
-            {listdata?.map(v => {
-              return (
-                <List.Item className='cards'>
-                  <List.Item.Meta
-                    avatar={<Avatar src={v?.movieImage} />}
-                    title={
-                      v?.name +
-                      ' ' +
-                      moment(v?.birthday).format('YYYY-MM-DD') +
-                      ' to ' +
-                      moment(v?.birthday).format('YYYY-MM-DD')
-                    }
-                    description={v?.description}
-                  />
-                  <div className='dis'>
-                    <Button type='primary' danger>
-                      Proceed to extend validity
-                    </Button>
-                  </div>
-                </List.Item>
-              )
-            })}
+            {!localStorage.getItem('admin') &&
+              listdata?.map(v => {
+                return (
+                  <List.Item className='cards'>
+                    <List.Item.Meta
+                      avatar={<Avatar src={v?.movieImage} />}
+                      title={
+                        v?.name +
+                        ' ' +
+                        moment(v?.birthday).format('YYYY-MM-DD') +
+                        ' to ' +
+                        moment(v?.birthday).format('YYYY-MM-DD')
+                      }
+                      description={v?.description}
+                    />
+                    <div className='dis'>
+                      <Button type='primary' danger>
+                        Proceed to extend validity
+                      </Button>
+                    </div>
+                  </List.Item>
+                )
+              })}
+            {localStorage.getItem('admin') && (
+              <div>
+                <Table dataSource={listdata} columns={columns} />
+              </div>
+            )}
           </div>
         )}
       </div>
