@@ -2,7 +2,7 @@ import {
   Button,
   Input,
   message,
-  notification,
+  // notification,
   Form,
   Avatar,
   Typography,
@@ -12,7 +12,7 @@ import {
 import * as React from 'react'
 import {
   UserOutlined,
-  LockOutlined,
+  // LockOutlined,
   ArrowRightOutlined
 } from '@ant-design/icons'
 import './styled.css'
@@ -21,11 +21,13 @@ class Login extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      username: null,
-      password: null
+      username: '',
+      password: ''
     }
   }
-
+  componentDidMount () {
+    localStorage.clear()
+  }
   setInputValue = (name, val) => {
     this.setState({
       [name]: val
@@ -34,7 +36,7 @@ class Login extends React.Component {
   handleSubmit = async () => {
     debugger
     await message.loading('Login In....', 5)
-    fetch('http://3.141.17.227:3001/api/login', {
+    fetch('http://193.164.132.55:3001/api/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -49,25 +51,33 @@ class Login extends React.Component {
         return data.json()
       })
       .then(response => {
-        if (response.info === 'login sucess') {
-          notification.success({
-            message: 'Success',
-            description: 'User login has been successful!'
-          })
-          localStorage.setItem('token', response?.token)
-          localStorage.setItem('user_id', response?.data?.id)
-          this.props.history.push('/home')
+        if (
+          response.info === 'valid  user' ||
+          response.info === 'email send successfully'
+        ) {
+          // notification.success({
+          //   message: 'Success',
+          //   description: 'User login has been successful!'
+          // })
+          // localStorage.setItem('token', response?.token)
+          localStorage.setItem('user_id_login', response?.data?.id)
+          localStorage.setItem('user_name', this.state.username)
+          if (response?.data?.role_id === 1) {
+            localStorage.setItem('admin', response?.data?.role_id)
+          }
+          // this.props.history.push('/signin')
+          window.location.pathname = '/signin'
         } else {
           message.error('Faild to login', 5)
         }
       })
       .catch(error => {
-          message.error('Faild to login', 5)
+        message.error('Faild to login', 5)
         console.log(error, 5)
       })
   }
   render () {
-    const { username, password } = this.state
+    const { username } = this.state
     return (
       <div className='main-login'>
         <Row style={{ height: '100%' }}>
@@ -104,10 +114,10 @@ class Login extends React.Component {
                     }
                     prefix={<UserOutlined className='site-form-item-icon' />}
                     value={username}
-                    placeholder='Username'
+                    placeholder='user id / mail'
                   />
                 </Form.Item>
-                <Form.Item
+                {/* <Form.Item
                   name='password'
                   rules={[
                     {
@@ -127,18 +137,18 @@ class Login extends React.Component {
                     type='password'
                     placeholder='Password'
                   />
-                </Form.Item>
+                </Form.Item> */}
                 <Form.Item style={{ margin: 0 }}>
                   {/* <Form.Item name='remember' valuePropName='checked' noStyle>
                     <span className='login-form-keep'>Keep me login</span>
                   </Form.Item> */}
 
-                  <span
+                  {/* <span
                     className='login-form-forgot'
                     onClick={() => this.props.history.push('/forget')}
                   >
                     Forgot password
-                  </span>
+                  </span> */}
                 </Form.Item>
 
                 <Form.Item>
@@ -148,20 +158,20 @@ class Login extends React.Component {
                     className='login-form-button'
                     // onClick={() => this.handleSubmit()}
                   >
-                    Log in <ArrowRightOutlined className='loginIcon' />
+                    Submit <ArrowRightOutlined className='loginIcon' />
                   </Button>
-                  <span className='login-form-register'>
-                    You don't have an account?{' '}
+                  {/* <span className='login-form-register'>
+                    You don't have an account?
                     <span
                       style={{ cursor: 'pointer', textDecoration: 'underline' }}
                       onClick={() => this.props.history.push('/signin')}
                     >
                       SignUp
-                    </span>{' '}
-                  </span>
+                    </span>
+                  </span> */}
                 </Form.Item>
               </Form>
-            </div>{' '}
+            </div>
           </Col>
           <Col span={12} className='s-col'>
             <div className='circle-ripple'></div>

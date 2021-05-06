@@ -89,7 +89,7 @@ export const createMovieTitle = (name, price, description, movieImage, id, user_
             description: "${description}"
             movieImage: "${movieImage}"
             id: "${id}"
-            isPurchase: true
+            isPurchase: false
             updatedBy: "${user_id}"
             createdBy: "${user_id}"
             createdAt: "${date}"

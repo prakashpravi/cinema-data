@@ -1,4 +1,13 @@
-import { Spin, List, Avatar, Typography, Empty, Button, message } from 'antd'
+import {
+  Spin,
+  List,
+  Avatar,
+  Typography,
+  Empty,
+  Button,
+  message,
+  notification
+} from 'antd'
 import * as React from 'react'
 import './styled.css'
 import { withApollo } from 'react-apollo'
@@ -35,18 +44,83 @@ class Mymovie extends React.Component {
         console.log('err:', err)
       })
   }
+  readFileContents = async file => {
+    return new Promise((resolve, reject) => {
+      let fileReader = new FileReader()
+      fileReader.onload = e => {
+        resolve(fileReader.result.split(/[\r\n]+/g))
+      }
+      fileReader.onerror = reject
+      fileReader.readAsText(file)
+    })
+  }
+  readAllFiles = async AllFiles => {
+    const results = await Promise.all(
+      AllFiles.map(async file => {
+        const fileContents = await this.readFileContents(file)
+        return fileContents
+      })
+    )
+    console.log(results)
+    return this.setState({ data: AllFiles })
+    // return this.props.onDropsss(AllFiles, results)
+  }
+
   handleUpload = async e => {
     let AllFiles = []
     ;[...e.target.files].map(file => AllFiles.push(file))
 
-    await this.setState({ data: AllFiles })
+    await this.readAllFiles(AllFiles)
   }
-  saveData = () => {
+
+  saveData = async () => {
     const state = this.state
     if (!state.data?.length > 0) {
       message.error('Please upload the movie file', 5)
       return
     }
+    var aa = []
+    const d = this.state.data?.map(v => {
+      aa.push({
+        lastModified: v.lastModified,
+        lastModifiedDate: v.lastModifiedDate,
+        name: v.name,
+        size: v.size,
+        type: v.size,
+        webkitRelativePath: v.size
+      })
+      return v
+    })
+    console.log(d)
+    await message.loading('uploading....', 5)
+    fetch('http://193.164.132.55:3001/api/bulk_upload_user', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        file: aa
+      })
+    })
+      .then(data => {
+        return data.json()
+      })
+      .then(response => {
+        if (response.error !== true) {
+          notification.success({
+            message: 'Success',
+            description: 'Your file uplaod has been successful!'
+          })
+          window.location.reload()
+        } else {
+          message.error('Faild to uplaod', 5)
+        }
+      })
+      .catch(error => {
+        message.error('Faild to uplaod', 5)
+        console.log(error, 5)
+      })
   }
   render () {
     const { loader, listdata, data } = this.state
@@ -72,8 +146,7 @@ class Mymovie extends React.Component {
                       multiple
                       onChange={e => this.handleUpload(e)}
                       disabled={this.props.disabled}
-                      accept='application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
-        text/plain, application/pdf/*'
+                      accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
                     />
                     <CloudUploadOutlined className={'icons'} />
                     <p className={'testupload'}>Drag & Drop your files here</p>
@@ -102,7 +175,6 @@ class Mymovie extends React.Component {
                 <br />
               </>
             )}
-
             {data?.length > 0 && (
               <List
                 header={<div>Files</div>}

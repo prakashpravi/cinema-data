@@ -1,7 +1,7 @@
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities';
 import { HttpLink,InMemoryCache,ApolloClient,split,ApolloLink } from 'apollo-boost';
-const config = 'http://3.141.17.227:3001/graphql'
+const config = 'http://193.164.132.55:3001/graphql'
 const localStorageKeys = {
     auth_token:'auth_token'
 }
