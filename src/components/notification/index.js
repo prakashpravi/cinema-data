@@ -1,8 +1,8 @@
-import { Spin, List, Avatar, Typography } from 'antd'
+import { Spin, List, Avatar, Typography, Empty } from 'antd'
 import * as React from 'react'
 import './styled.css'
 import { withApollo } from 'react-apollo'
-import { allMoviesTitles } from '../../hooks/query'
+import { allMoviesTitles, myMoviesTitles } from '../../hooks/query'
 import { CheckCircleOutlined } from '@ant-design/icons'
 const { Title } = Typography
 class Notification extends React.Component {
@@ -17,7 +17,9 @@ class Notification extends React.Component {
     await setTimeout(() => this.setState({ loader: false }), 2000)
     this.props.client
       .query({
-        query: allMoviesTitles
+        query: localStorage.getItem('admin')
+          ? allMoviesTitles
+          : myMoviesTitles(localStorage.getItem('user_id'))
       })
       .then(response => {
         if (response?.data) {
@@ -45,6 +47,7 @@ class Notification extends React.Component {
             <Title level={5} className='m_title'>
               Your Notifications
             </Title>
+            {listdata?.length === 0 && <Empty />}
             {listdata?.map(v => {
               return (
                 <List.Item className='cards'>

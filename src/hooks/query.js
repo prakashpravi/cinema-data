@@ -1,6 +1,56 @@
 import gql from "graphql-tag";
+
+export const requestAll = gql `query MyQuery {
+  allMovieTitles (filter: {isPurchase: {equalTo: false}}){
+    nodes {
+      nodeId
+      createdBy
+      createdAt
+      description
+      id
+      isActive
+      isPurchase
+      movieImage
+      name
+      price
+      updatedAt
+      updatedBy
+    }
+  }
+}`;
+
+export const requestAccpect = (id) => {
+  return gql `mutation MyMutation {
+    updateMovieTitleById(
+      input: {
+        id: "${id}"
+        movieTitlePatch: { isPurchase: true }
+      }
+    ) {
+      clientMutationId
+    }
+  }
+  `
+};
+export const myMoviesTitles = (id) => {
+  return gql `query MyQuery {
+  allMovieTitles(filter: {createdBy: {equalTo: "${id}"}, isPurchase: {equalTo: true}}) {
+    nodes {
+      name
+      id
+      description
+      createdAt
+      price
+      movieImage
+      isPurchase
+    }
+  }
+}
+`
+};
+
 var allMoviesTitles = gql `query MyQuery {
-  allMovieTitles {
+  allMovieTitles (filter: {isPurchase: {equalTo: true}}){
     nodes {
     name
     id
@@ -8,6 +58,7 @@ var allMoviesTitles = gql `query MyQuery {
     price
     movieImage
     description
+    isPurchase
     }
   }
 }`;

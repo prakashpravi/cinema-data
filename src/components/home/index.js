@@ -5,7 +5,7 @@ import './styled.css'
 import AutoPlay from '../slider'
 import ModalCom from '../comman/dialogbox'
 import LinelistCom from '../lineList'
-import { allMoviesTitles } from '../../hooks/query'
+import { allMoviesTitles, myMoviesTitles } from '../../hooks/query'
 import { withApollo } from 'react-apollo'
 import moment from 'moment'
 const { Title, Text } = Typography
@@ -28,7 +28,9 @@ class HomeCom extends React.Component {
     await setTimeout(() => this.setState({ loader: false }), 2000)
     this.props.client
       .query({
-        query: allMoviesTitles
+        query: localStorage.getItem('admin')
+          ? allMoviesTitles
+          : myMoviesTitles(localStorage.getItem('user_id'))
       })
       .then(response => {
         if (response?.data) {
@@ -39,7 +41,7 @@ class HomeCom extends React.Component {
             return v
           })
           this.setState({
-            listdata: data,
+            listdata: data
           })
         }
       })

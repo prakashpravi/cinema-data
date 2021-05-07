@@ -116,6 +116,7 @@
 }
 
 .main .login-form-forgot {
+  margin-top: 10px;
   float: right;
   color: #5e5e5e;
   font-weight: 500;

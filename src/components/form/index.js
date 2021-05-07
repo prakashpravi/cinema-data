@@ -101,7 +101,8 @@ class Forms extends React.Component {
           description: 'Your details has been successful!'
         })
         this.setState({ ...this.state })
-        this.props.history.push('/home')
+        // this.props.history.push('/home')
+        window.location.href = '/home'
       })
       .catch(err => {
         message.error('Faild to fetch data', 5)

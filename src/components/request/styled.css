@@ -1,0 +1,64 @@
+.request_main {
+  margin-top: 70px;
+  width: 99vw;
+  padding: 30px;
+  background: #F3F6FF;
+  height: 100vh;
+}
+
+.request_main .m_title {
+  font-size: 24px;
+}
+
+.request_main .cards {
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  height: 80px;
+  margin: 10px 0px;
+  overflow: hidden;
+}
+
+.request_main .cards .dis {
+  color: green;
+}
+
+.request_main .cards .ant-avatar {
+  margin-top: 8px;
+}
+
+.request_main .cards .ant-list-item-meta-description {
+  width: 90%;
+  overflow: hidden;
+  height: 24px;
+}
+
+.loader {
+  width: 99vw;
+  height: 88vh;
+  margin: auto;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+@media (max-width: 426px) {
+  .ant-btn-dangerous.ant-btn-primary {
+    font-size: 10px;
+    padding: 0px 6px;
+  }
+  .ant-btn-primary {
+    font-size: 10px;
+    padding: 0px 6px;
+  }
+}
+/*# sourceMappingURL=styled.css.map */

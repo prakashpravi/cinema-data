@@ -42,7 +42,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 70px 40px;
+  padding: 70px 40px 160px;
 }
 
 .drivermain .Input,
@@ -155,8 +155,8 @@
 
 @media (max-width: 426px) {
   .drivermain {
+    padding-top: 70px;
     width: 100vw;
-    padding: 70px 20px;
   }
   .search_field {
     width: 100% !important;

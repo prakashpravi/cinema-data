@@ -34,7 +34,7 @@
         margin: auto;
         text-align: center;
         justify-content: center;
-        padding: 70px 40px;
+        padding: 70px 40px 160px;
     }
 
     .Input,
@@ -131,8 +131,8 @@
 
 @media (max-width: 426px) {
     .drivermain {
-        width: 100vw;
-        padding: 70px 20px;
+    padding-top: 70px;
+    width: 100vw;
     }
 
     .search_field {

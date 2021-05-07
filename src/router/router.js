@@ -8,5 +8,6 @@ const routes = {
     mymovie:"/mymovie",
     notification:"/notification",
     passwordchange:"/passwordchange",
+    request:"/request",
 } 
 export default routes;
