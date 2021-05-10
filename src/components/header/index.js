@@ -40,6 +40,7 @@ class Header extends React.Component {
     }
   }
   componentDidMount = async () => {
+    debugger
     this.props.client
       .query({
         query: userProfileById(localStorage.getItem('user_id'))

@@ -1,13 +1,16 @@
 .notification_main {
-  margin-top: 70px;
-  width: 99vw;
+  margin-top: 68px;
+  width: 99.6vw;
   padding: 30px;
-  background: #F3F6FF;
   height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1505775561242-727b7fba20f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwxMTQ1NTQ4fHxlbnwwfHx8fA%3D%3D&w=1000&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .notification_main .m_title {
   font-size: 24px;
+  color: #fff;
 }
 
 .notification_main .cards {

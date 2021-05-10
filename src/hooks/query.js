@@ -48,9 +48,25 @@ export const myMoviesTitles = (id) => {
 }
 `
 };
+export const myMoviesTitles1 = (id) => {
+  return gql `query MyQuery {
+  allMovieTitles(filter: {createdBy: {equalTo: "${id}"}}) {
+    nodes {
+      name
+      id
+      description
+      createdAt
+      price
+      movieImage
+      isPurchase
+    }
+  }
+}
+`
+};
 
 var allMoviesTitles = gql `query MyQuery {
-  allMovieTitles (filter: {isPurchase: {equalTo: true}}){
+  allMovieTitles {
     nodes {
     name
     id
@@ -79,7 +95,6 @@ export const userProfileById = (id) => {
   `;
 }
 export const createMovieTitle = (name, price, description, movieImage, id, user_id, date) => {
-  debugger
   return gql `mutation {
       createMovieTitle(
         input: {
@@ -101,6 +116,27 @@ export const createMovieTitle = (name, price, description, movieImage, id, user_
         clientMutationId
       }
     }
+    `;
+}
+export const updatetabledata = (name, price, description, id, user_id, date) => {
+  return gql `mutation MyMutation {
+    updateMovieTitleById(
+      input: {
+        movieTitlePatch: {
+          name: "${name}"
+          updatedBy: "${user_id}"
+          updatedAt: "${date}"
+          price: "${price}"
+          description: "${description}"
+          createdBy: "${user_id}"
+          createdAt: "${date}"
+        }
+        id: "${id}"
+      }
+    ) {
+      clientMutationId
+    }
+  }
     `;
 }
 export const updateUserProfileById = (firstName, lastName, email, mobile_no, birthday, movieImage, id) => {

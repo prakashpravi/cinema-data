@@ -6,7 +6,9 @@ import {
   Empty,
   Button,
   message,
-  notification
+  notification,
+  Table,
+  Space
 } from 'antd'
 import * as React from 'react'
 import './styled.css'
@@ -14,6 +16,8 @@ import { withApollo } from 'react-apollo'
 import { allMoviesTitles, myMoviesTitles } from '../../hooks/query'
 import moment from 'moment'
 import { CloudUploadOutlined } from '@ant-design/icons'
+import axios from 'axios'
+import EditableFormTable from './table'
 const { Title } = Typography
 class Mymovie extends React.Component {
   constructor (props) {
@@ -67,52 +71,29 @@ class Mymovie extends React.Component {
   }
 
   handleUpload = async e => {
-    let AllFiles = []
-    ;[...e.target.files].map(file => AllFiles.push(file))
-
-    await this.readAllFiles(AllFiles)
+    let AllFiles = e.target.files[0]
+    // [...e.target.files].map(file => AllFiles.push(file[0]))
+    this.saveData(AllFiles)
+    // await this.readAllFiles(AllFiles)
   }
 
-  saveData = async () => {
+  saveData = async fileData => {
     const state = this.state
-    if (!state.data?.length > 0) {
-      message.error('Please upload the movie file', 5)
-      return
-    }
-    var aa = []
-    const d = this.state.data?.map(v => {
-      aa.push({
-        lastModified: v.lastModified,
-        lastModifiedDate: v.lastModifiedDate,
-        name: v.name,
-        size: v.size,
-        type: v.size,
-        webkitRelativePath: v.size
-      })
-      return v
-    })
-    console.log(d)
+    // if (!state.data?.length > 0) {
+    //   message.error('Please upload the movie file', 5)
+    //   return
+    // }
+    let file = new FormData()
+    file.append('file', fileData)
     await message.loading('uploading....', 5)
-    fetch('http://193.164.132.55:3001/api/bulk_upload_user', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        file: aa
-      })
-    })
-      .then(data => {
-        return data.json()
-      })
+    axios
+      .post('http://193.164.132.55:3001/api/bulk_upload_user', file)
       .then(response => {
         if (response.error !== true) {
           notification.success({
             message: 'Success',
             description: 'Your file uplaod has been successful!'
           })
-          window.location.reload()
         } else {
           message.error('Faild to uplaod', 5)
         }
@@ -124,6 +105,7 @@ class Mymovie extends React.Component {
   }
   render () {
     const { loader, listdata, data } = this.state
+
     return (
       <div>
         {loader && (
@@ -163,14 +145,14 @@ class Mymovie extends React.Component {
                     </Button>
                   </div>
                 </div>
-                <br />
+                {/* <br />
                 <Button
                   type='primary'
                   className='adddatas'
                   onClick={() => this.saveData()}
                 >
                   Submit
-                </Button>
+                </Button> */}
 
                 <br />
               </>
@@ -190,28 +172,37 @@ class Mymovie extends React.Component {
 
             {listdata?.length === 0 && <Empty />}
 
-            {listdata?.map(v => {
-              return (
-                <List.Item className='cards'>
-                  <List.Item.Meta
-                    avatar={<Avatar src={v?.movieImage} />}
-                    title={
-                      v?.name +
-                      ' ' +
-                      moment(v?.birthday).format('YYYY-MM-DD') +
-                      ' to ' +
-                      moment(v?.birthday).format('YYYY-MM-DD')
-                    }
-                    description={v?.description}
-                  />
-                  <div className='dis'>
-                    <Button type='primary' danger>
-                      Proceed to extend validity
-                    </Button>
-                  </div>
-                </List.Item>
-              )
-            })}
+            {!localStorage.getItem('admin') &&
+              listdata?.map(v => {
+                return (
+                  <List.Item className='cards'>
+                    <List.Item.Meta
+                      avatar={<Avatar src={v?.movieImage} />}
+                      title={
+                        v?.name +
+                        ' ' +
+                        moment(v?.birthday).format('YYYY-MM-DD') +
+                        ' to ' +
+                        moment(v?.birthday).format('YYYY-MM-DD')
+                      }
+                      description={v?.description}
+                    />
+                    <div className='dis'>
+                      <Button type='primary' danger>
+                        Proceed to extend validity
+                      </Button>
+                    </div>
+                  </List.Item>
+                )
+              })}
+            {localStorage.getItem('admin') && (
+              <div>
+                <EditableFormTable
+                  data={listdata}
+                  // columns={columns}
+                />
+              </div>
+            )}
           </div>
         )}
       </div>
