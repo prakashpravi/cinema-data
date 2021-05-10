@@ -13,14 +13,14 @@ import {
   notification,
   Badge
 } from 'antd'
-import { DownOutlined } from '@ant-design/icons'
 import './styled.css'
 import moment from 'moment'
 import { withApollo } from 'react-apollo'
 import {
   userProfileById,
   updateUserProfileById,
-  allMoviesTitles
+  allMoviesTitles,
+  myMoviesTitles
 } from '../../hooks/query'
 
 class Header extends React.Component {
@@ -53,8 +53,15 @@ class Header extends React.Component {
             mobile_no: data?.mobileNo,
             birthday: moment(data?.birthday).format('YYYY-MM-DD'),
             email: data?.email,
-            movieImage: data?.profileImg,
-            id: data?.id
+            fileList: [
+              {
+                uid: '-1',
+                status: 'done',
+                url: data?.profileImg
+              }
+            ],
+            id: data?.id,
+            movieImage: data?.profileImg
           })
         }
       })
@@ -63,7 +70,9 @@ class Header extends React.Component {
       })
     this.props.client
       .query({
-        query: allMoviesTitles
+        query: localStorage.getItem('admin')
+          ? allMoviesTitles
+          : myMoviesTitles(localStorage.getItem('user_id'))
       })
       .then(response => {
         if (response?.data) {
@@ -283,34 +292,47 @@ class Header extends React.Component {
                     marginTop: -8
                   }}
                   src='assets/TITLES (2).png'
+                  onClick={() => (window.location.href = '/home')}
                 />
               </Breadcrumb.Item>
 
               <div className='center_of'>
                 <Breadcrumb.Item
                   className={`home ${location === '/home' && 'active'}`}
-                  onClick={() => this.props.history.push('/home')}
+                  onClick={() => (window.location.href = '/home')}
                 >
                   Home
                 </Breadcrumb.Item>
                 <Breadcrumb.Item
-                  className={`home ${location === '/mymovie' && 'active'}`}
-                  onClick={() => this.props.history.push('/mymovie')}
+                  className={`home mb sv ${location === '/mymovie' &&
+                    'active'}`}
+                  onClick={() => (window.location.href = '/mymovie')}
                 >
-                  My movies
+                  {localStorage.getItem('admin') ? "Data's" : ' My movies'}
                 </Breadcrumb.Item>
                 <Breadcrumb.Item
-                  className={`home ${location === '/notification' && 'active'}`}
-                  onClick={() => this.props.history.push('/notification')}
+                  className={`home mb lg ${location === '/notification' &&
+                    'active'}`}
+                  onClick={() => (window.location.href = '/notification')}
                 >
                   <Badge
                     size='small'
-                    count={listdata?.length}
+                    count={listdata?.length === 0 ? '0,' : listdata?.length}
                     style={{ backgroundColor: '#52c41a', color: '#fff' }}
                   >
                     Notification
                   </Badge>
                 </Breadcrumb.Item>
+
+                {localStorage.getItem('admin') && (
+                  <Breadcrumb.Item
+                    className={`home mb sv ${location === '/request' &&
+                      'active'}`}
+                    onClick={() => (window.location.href = '/request')}
+                  >
+                    {'Request'}
+                  </Breadcrumb.Item>
+                )}
               </div>
             </Breadcrumb>
           }
@@ -332,6 +354,27 @@ class Header extends React.Component {
                   >
                     Logout
                   </Menu.Item>
+
+                  <Menu.Item
+                    className='menulist_item hinmbl'
+                    onClick={() => (window.location.href = '/notification')}
+                  >
+                    {localStorage.getItem('admin') ? "Data's" : ' My movies'}
+                  </Menu.Item>
+                  <Menu.Item
+                    className='menulist_item hinmbl'
+                    onClick={() => (window.location.href = '/mymovie')}
+                  >
+                    Notification
+                  </Menu.Item>
+                  {localStorage.getItem('admin') && (
+                    <Menu.Item
+                      className='menulist_item hinmbl'
+                      onClick={() => (window.location.href = '/request')}
+                    >
+                      Request
+                    </Menu.Item>
+                  )}
                 </Menu>
               }
             >
@@ -340,20 +383,8 @@ class Header extends React.Component {
                   cursor: 'pointer'
                 }}
               >
-                {' '}
-                More
-                <DownOutlined
-                  style={{
-                    fontSize: '15px',
-                    margin: '4px 0px 0px 2px',
-                    position: 'absolute'
-                  }}
-                />
+                More▾
               </span>
-              {/* <Avatar
-                className='avatar_icon'
-                src='https://i.pinimg.com/564x/95/79/c1/9579c179f04e0f7c52cb3932ec916910.jpg'
-              /> */}
             </Dropdown>
           ]}
         />

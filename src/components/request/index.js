@@ -1,11 +1,11 @@
-import { Spin, List, Avatar, Typography, Empty } from 'antd'
+import { Spin, List, Avatar, Typography, Empty, Button } from 'antd'
 import * as React from 'react'
 import './styled.css'
 import { withApollo } from 'react-apollo'
-import { allMoviesTitles, myMoviesTitles } from '../../hooks/query'
-import { CheckCircleOutlined } from '@ant-design/icons'
+import { requestAll, requestAccpect } from '../../hooks/query'
+import moment from 'moment'
 const { Title } = Typography
-class Notification extends React.Component {
+class Request extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -17,9 +17,7 @@ class Notification extends React.Component {
     await setTimeout(() => this.setState({ loader: false }), 2000)
     this.props.client
       .query({
-        query: localStorage.getItem('admin')
-          ? allMoviesTitles
-          : myMoviesTitles(localStorage.getItem('user_id'))
+        query: requestAll
       })
       .then(response => {
         if (response?.data) {
@@ -27,6 +25,24 @@ class Notification extends React.Component {
           this.setState({
             listdata: data
           })
+        }
+      })
+      .catch(err => {
+        console.log('err:', err)
+      })
+  }
+  accpectAll = async val => {
+    await this.props.client
+      .mutate({
+        mutation: requestAccpect(val.id)
+      })
+      .then(response => {
+        if (response?.data) {
+          const data = response?.data?.allMovieTitles?.nodes
+          this.setState({
+            listdata: data
+          })
+          window.location.reload()
         }
       })
       .catch(err => {
@@ -43,9 +59,9 @@ class Notification extends React.Component {
           </div>
         )}
         {!loader && (
-          <div className='notification_main'>
+          <div className='request_main'>
             <Title level={5} className='m_title'>
-              Your Notifications
+              Request's
             </Title>
             {listdata?.length === 0 && <Empty />}
             {listdata?.map(v => {
@@ -53,11 +69,23 @@ class Notification extends React.Component {
                 <List.Item className='cards'>
                   <List.Item.Meta
                     avatar={<Avatar src={v?.movieImage} />}
-                    title={v?.name}
+                    title={
+                      v?.name +
+                      ' ' +
+                      moment(v?.birthday).format('YYYY-MM-DD') +
+                      ' to ' +
+                      moment(v?.birthday).format('YYYY-MM-DD')
+                    }
                     description={v?.description}
                   />
                   <div className='dis'>
-                    <CheckCircleOutlined /> verified
+                    <Button type='primary' onClick={() => this.accpectAll(v)}>
+                      Accpect
+                    </Button>
+                    &nbsp;
+                    <Button type='primary' danger>
+                      Cancel
+                    </Button>
                   </div>
                 </List.Item>
               )
@@ -68,4 +96,4 @@ class Notification extends React.Component {
     )
   }
 }
-export default withApollo(Notification)
+export default withApollo(Request)
