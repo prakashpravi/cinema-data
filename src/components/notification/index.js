@@ -2,8 +2,8 @@ import { Spin, List, Avatar, Typography, Empty } from 'antd'
 import * as React from 'react'
 import './styled.css'
 import { withApollo } from 'react-apollo'
-import { allMoviesTitles, myMoviesTitles } from '../../hooks/query'
-import { CheckCircleOutlined } from '@ant-design/icons'
+import { allMoviesTitles, myMoviesTitles1 } from '../../hooks/query'
+import { CheckCircleOutlined,CloseCircleOutlined } from '@ant-design/icons'
 const { Title } = Typography
 class Notification extends React.Component {
   constructor (props) {
@@ -19,7 +19,7 @@ class Notification extends React.Component {
       .query({
         query: localStorage.getItem('admin')
           ? allMoviesTitles
-          : myMoviesTitles(localStorage.getItem('user_id'))
+          : myMoviesTitles1(localStorage.getItem('user_id'))
       })
       .then(response => {
         if (response?.data) {
@@ -57,7 +57,8 @@ class Notification extends React.Component {
                     description={v?.description}
                   />
                   <div className='dis'>
-                    <CheckCircleOutlined /> verified
+                   
+                    {v?.isPurchase ? <><CloseCircleOutlined />verified</> :<> <CheckCircleOutlined /> cancel</>}
                   </div>
                 </List.Item>
               )

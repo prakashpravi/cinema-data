@@ -66,7 +66,7 @@ class Login extends React.Component {
             localStorage.setItem('admin', response?.data?.role_id)
           }
           // this.props.history.push('/signin')
-          window.location.pathname = '/signin'
+          window.location.href = '/signin'
         } else {
           message.error('Faild to login', 5)
         }

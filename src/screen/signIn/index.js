@@ -96,9 +96,9 @@ class SignIn extends React.Component {
                     {
                       required: true,
                       message:
-                        localStorage.getItem('admin') === 1
-                          ? 'Please enter your password!'
-                          : 'Please enter your otp!'
+                        localStorage.getItem('admin') === '1'
+                          ? 'Please enter your password'
+                          : 'Please enter your otp'
                     }
                   ]}
                 >
@@ -112,7 +112,7 @@ class SignIn extends React.Component {
                     prefix={<UserOutlined className='site-form-item-icon' />}
                     value={password}
                     placeholder={
-                      localStorage.getItem('admin') === 1
+                      localStorage.getItem('admin') === '1'
                         ? 'please enter password'
                         : 'please enter otp'
                     }

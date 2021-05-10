@@ -17,7 +17,6 @@ import './form.css'
 import { withApollo } from 'react-apollo'
 import moment from 'moment'
 import { uuid } from 'uuidv4'
-
 import { userProfileById, createMovieTitle } from '../../hooks/query'
 const { Title } = Typography
 const { Option } = Select

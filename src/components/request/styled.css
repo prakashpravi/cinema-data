@@ -1,13 +1,16 @@
 .request_main {
-  margin-top: 70px;
-  width: 99vw;
+  margin-top: 68px;
+  width: 99.6vw;
   padding: 30px;
-  background: #F3F6FF;
   height: 100vh;
+  background-image: url("https://www.verdict.co.uk/wp-content/uploads/2017/09/shutterstock_385458487.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .request_main .m_title {
   font-size: 24px;
+  color: #fff;
 }
 
 .request_main .cards {

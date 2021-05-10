@@ -1,12 +1,16 @@
 .request_main {
-    margin-top: 70px;
-    width: 99vw;
+    margin-top: 68px;
+    width: 99.6vw;
     padding: 30px;
-    background: #F3F6FF;
+    // background: #F3F6FF;
     height: 100vh;
+    background-image: url('https://www.verdict.co.uk/wp-content/uploads/2017/09/shutterstock_385458487.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 
     .m_title {
         font-size: 24px;
+        color: #fff;
     }
 
     .cards {
@@ -16,6 +20,7 @@
         height: 80px;
         margin: 10px 0px;
         overflow: hidden;
+
         .dis {
             color: green;
         }
@@ -45,11 +50,13 @@
     background-color: #fff;
     overflow: hidden;
 }
+
 @media (max-width: 426px) {
     .ant-btn-dangerous.ant-btn-primary {
         font-size: 10px;
         padding: 0px 6px;
     }
+
     .ant-btn-primary {
         font-size: 10px;
         padding: 0px 6px;

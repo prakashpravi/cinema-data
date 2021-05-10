@@ -7,15 +7,17 @@ import {
   Button,
   message,
   notification,
-  Table
+  Table,
+  Space
 } from 'antd'
 import * as React from 'react'
 import './styled.css'
 import { withApollo } from 'react-apollo'
 import { allMoviesTitles, myMoviesTitles } from '../../hooks/query'
 import moment from 'moment'
-import { CloudUploadOutlined } from '@ant-design/icons';
-import axios from 'axios';
+import { CloudUploadOutlined } from '@ant-design/icons'
+import axios from 'axios'
+import EditableFormTable from './table'
 const { Title } = Typography
 class Mymovie extends React.Component {
   constructor (props) {
@@ -69,45 +71,29 @@ class Mymovie extends React.Component {
   }
 
   handleUpload = async e => {
-    let AllFiles = e.target.files[0];
-    debugger;
+    let AllFiles = e.target.files[0]
     // [...e.target.files].map(file => AllFiles.push(file[0]))
     this.saveData(AllFiles)
     // await this.readAllFiles(AllFiles)
   }
 
-  saveData = async (fileData) => {
-    debugger;
+  saveData = async fileData => {
     const state = this.state
     // if (!state.data?.length > 0) {
     //   message.error('Please upload the movie file', 5)
     //   return
     // }
-    var aa = []
-    const d = this.state.data?.map(v => {
-      aa.push({
-        lastModified: v.lastModified,
-        lastModifiedDate: v.lastModifiedDate,
-        name: v.name,
-        size: v.size,
-        type: v.size,
-        webkitRelativePath: v.size
-      })
-      return v
-    })
-    console.log(d)
-    let file  = new FormData();
-    file.append('file',fileData)
+    let file = new FormData()
+    file.append('file', fileData)
     await message.loading('uploading....', 5)
-    axios.post('http://193.164.132.55:3001/api/bulk_upload_user', file
-    )
+    axios
+      .post('http://193.164.132.55:3001/api/bulk_upload_user', file)
       .then(response => {
         if (response.error !== true) {
           notification.success({
             message: 'Success',
             description: 'Your file uplaod has been successful!'
           })
-          // window.location.reload()
         } else {
           message.error('Faild to uplaod', 5)
         }
@@ -119,23 +105,7 @@ class Mymovie extends React.Component {
   }
   render () {
     const { loader, listdata, data } = this.state
-    const columns = [
-      {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name'
-      },
-      {
-        title: 'Description',
-        dataIndex: 'description',
-        key: 'description'
-      },
-      {
-        title: 'CreatedAt',
-        dataIndex: 'createdAt',
-        key: 'createdAt'
-      }
-    ]
+
     return (
       <div>
         {loader && (
@@ -175,14 +145,14 @@ class Mymovie extends React.Component {
                     </Button>
                   </div>
                 </div>
-                <br />
+                {/* <br />
                 <Button
                   type='primary'
                   className='adddatas'
                   onClick={() => this.saveData()}
                 >
                   Submit
-                </Button>
+                </Button> */}
 
                 <br />
               </>
@@ -227,7 +197,10 @@ class Mymovie extends React.Component {
               })}
             {localStorage.getItem('admin') && (
               <div>
-                <Table dataSource={listdata} columns={columns} />
+                <EditableFormTable
+                  data={listdata}
+                  // columns={columns}
+                />
               </div>
             )}
           </div>
