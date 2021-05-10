@@ -24,9 +24,9 @@ class EditableTable extends React.Component {
     this.columns = [
       {
         title: 'Name',
-        dataIndex: 'name',
+        dataIndex: 'englishTitleName',
         width: '25%',
-        render: (text, record) => this.renderColumns(text, record, 'name')
+        render: (text, record) => this.renderColumns(text, record, 'englishTitleName')
       },
       {
         title: 'Description',
@@ -105,7 +105,7 @@ class EditableTable extends React.Component {
         return this.props.client
           .mutate({
             mutation: updatetabledata(
-              item.name,
+              item.englishTitleName,
               item.price,
               item.description,
               item.id,

@@ -70,7 +70,7 @@ class Request extends React.Component {
                   <List.Item.Meta
                     avatar={<Avatar src={v?.movieImage} />}
                     title={
-                      v?.name +
+                      v?.englishTitleName +
                       ' ' +
                       moment(v?.birthday).format('YYYY-MM-DD') +
                       ' to ' +

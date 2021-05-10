@@ -94,6 +94,7 @@ class Mymovie extends React.Component {
             message: 'Success',
             description: 'Your file uplaod has been successful!'
           })
+          window.location.reload()
         } else {
           message.error('Faild to uplaod', 5)
         }
@@ -179,7 +180,7 @@ class Mymovie extends React.Component {
                     <List.Item.Meta
                       avatar={<Avatar src={v?.movieImage} />}
                       title={
-                        v?.name +
+                        v?.englishTitleName +
                         ' ' +
                         moment(v?.birthday).format('YYYY-MM-DD')
                         //  +

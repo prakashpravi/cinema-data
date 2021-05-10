@@ -3,7 +3,7 @@ import * as React from 'react'
 import './styled.css'
 import { withApollo } from 'react-apollo'
 import { allMoviesTitles, myMoviesTitles1 } from '../../hooks/query'
-import { CheckCircleOutlined,CloseCircleOutlined } from '@ant-design/icons'
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 const { Title } = Typography
 class Notification extends React.Component {
   constructor (props) {
@@ -53,13 +53,21 @@ class Notification extends React.Component {
                 <List.Item className='cards'>
                   <List.Item.Meta
                     avatar={<Avatar src={v?.movieImage} />}
-                    title={v?.name}
+                    title={v?.englishTitleName}
                     description={v?.description}
                   />
                   <div className='dis'>
-                   
-                    {v?.isPurchase ? <><CloseCircleOutlined /> Verified</> :<> <CheckCircleOutlined style={{color:"red"}}/> <span style={{color:"red"}}>
-                    Failed</span></>}
+                    {v?.isPurchase ? (
+                      <>
+                        <CloseCircleOutlined /> Verified
+                      </>
+                    ) : (
+                      <>
+                        {' '}
+                        <CheckCircleOutlined style={{ color: 'red' }} />{' '}
+                        <span style={{ color: 'red' }}>Failed</span>
+                      </>
+                    )}
                   </div>
                 </List.Item>
               )

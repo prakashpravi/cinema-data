@@ -12,6 +12,7 @@ export const requestAll = gql `query MyQuery {
       isPurchase
       movieImage
       name
+      englishTitleName
       price
       updatedAt
       updatedBy
@@ -38,6 +39,7 @@ export const myMoviesTitles = (id) => {
     nodes {
       name
       id
+      englishTitleName
       description
       createdAt
       price
@@ -54,6 +56,7 @@ export const myMoviesTitles1 = (id) => {
     nodes {
       name
       id
+      englishTitleName
       description
       createdAt
       price
@@ -70,6 +73,7 @@ export const allMoviesTitles = gql `query MyQuery {
     nodes {
     name
     id
+    englishTitleName
     createdAt
     price
     movieImage
@@ -100,6 +104,7 @@ export const createMovieTitle = (name, price, description, movieImage, id, user_
         input: {
           movieTitle: {
             name: "${name}"
+            englishTitleName: "${name}"
             price: "${price}"
             description: "${description}"
             movieImage: "${movieImage}"
@@ -124,6 +129,7 @@ export const updatetabledata = (name, price, description, id, user_id, date) => 
       input: {
         movieTitlePatch: {
           name: "${name}"
+          englishTitleName: "${name}"
           updatedBy: "${user_id}"
           updatedAt: "${date}"
           price: "${price}"
