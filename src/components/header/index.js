@@ -40,7 +40,6 @@ class Header extends React.Component {
     }
   }
   componentDidMount = async () => {
-    debugger
     this.props.client
       .query({
         query: userProfileById(localStorage.getItem('user_id'))
@@ -54,13 +53,15 @@ class Header extends React.Component {
             mobile_no: data?.mobileNo,
             birthday: moment(data?.birthday).format('YYYY-MM-DD'),
             email: data?.email,
-            fileList: [
-              {
-                uid: '-1',
-                status: 'done',
-                url: data?.profileImg
-              }
-            ],
+            fileList: data?.profileImg
+              ? [
+                  {
+                    uid: '-1',
+                    status: 'done',
+                    url: data?.profileImg
+                  }
+                ]
+              : [],
             id: data?.id,
             movieImage: data?.profileImg
           })
@@ -146,7 +147,6 @@ class Header extends React.Component {
     await message.loading('Loading....', 5)
     this.props.client
       .mutate({
-        variables: {},
         mutation: updateUserProfileById(
           firstName,
           lastName,
@@ -162,7 +162,7 @@ class Header extends React.Component {
           message: 'Success',
           description: 'Your profile has been updated!'
         })
-        console.log('res:', res)
+        this.setState({ open: false })
       })
       .catch(err => {
         message.error(err, 5)
@@ -193,7 +193,7 @@ class Header extends React.Component {
             <Upload
               onChange={e => this.handleChange(e)}
               action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
-              fileList={fileList}
+              fileList={fileList.length > 0 ? fileList : []}
               multiple={false}
               listType='picture-card'
               onRemove={() =>
@@ -211,7 +211,7 @@ class Header extends React.Component {
                 autoFocus
                 autoComplete='off'
                 className='Input'
-                value={firstName}
+                value={firstName ? firstName : ''}
                 size='large'
                 onChange={e => this.handlechange('firstName', e.target.value)}
                 placeholder='FirstName'
@@ -224,7 +224,7 @@ class Header extends React.Component {
                 autoFocus
                 autoComplete='off'
                 className='Input'
-                value={lastName}
+                value={lastName ? lastName : ''}
                 size='large'
                 required
                 onChange={e => this.handlechange('lastName', e.target.value)}
@@ -237,7 +237,7 @@ class Header extends React.Component {
                 autoFocus
                 autoComplete='off'
                 className='Input'
-                value={email}
+                value={email ? email : ''}
                 size='large'
                 onChange={e => this.handlechange('email', e.target.value)}
                 placeholder='email'

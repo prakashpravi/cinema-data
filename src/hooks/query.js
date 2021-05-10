@@ -65,7 +65,7 @@ export const myMoviesTitles1 = (id) => {
 `
 };
 
-var allMoviesTitles = gql `query MyQuery {
+export const allMoviesTitles = gql `query MyQuery {
   allMovieTitles {
     nodes {
     name
@@ -159,7 +159,4 @@ export const updateUserProfileById = (firstName, lastName, email, mobile_no, bir
     }
   }
     `;
-}
-export {
-  allMoviesTitles,
 }

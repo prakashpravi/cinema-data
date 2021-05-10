@@ -29,7 +29,7 @@ class Mymovie extends React.Component {
     }
   }
   componentDidMount = async () => {
-    await setTimeout(() => this.setState({ loader: false }), 2000)
+    await setTimeout(() => this.setState({ loader: false }), 1000)
     this.props.client
       .query({
         query: localStorage.getItem('admin')
@@ -157,7 +157,7 @@ class Mymovie extends React.Component {
                 <br />
               </>
             )}
-            {data?.length > 0 && (
+            {/* {data?.length > 0 && (
               <List
                 header={<div>Files</div>}
                 bordered
@@ -168,9 +168,9 @@ class Mymovie extends React.Component {
                   </List.Item>
                 )}
               />
-            )}
+            )} */}
 
-            {listdata?.length === 0 && <Empty />}
+            {/* {listdata?.length === 0 && <Empty />} */}
 
             {!localStorage.getItem('admin') &&
               listdata?.map(v => {
@@ -181,9 +181,10 @@ class Mymovie extends React.Component {
                       title={
                         v?.name +
                         ' ' +
-                        moment(v?.birthday).format('YYYY-MM-DD') +
-                        ' to ' +
                         moment(v?.birthday).format('YYYY-MM-DD')
+                        //  +
+                        // ' to ' +
+                        // moment(v?.birthday).format('YYYY-MM-DD')
                       }
                       description={v?.description}
                     />
@@ -199,7 +200,6 @@ class Mymovie extends React.Component {
               <div>
                 <EditableFormTable
                   data={listdata}
-                  // columns={columns}
                 />
               </div>
             )}

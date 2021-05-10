@@ -58,7 +58,8 @@ class Notification extends React.Component {
                   />
                   <div className='dis'>
                    
-                    {v?.isPurchase ? <><CloseCircleOutlined />verified</> :<> <CheckCircleOutlined /> cancel</>}
+                    {v?.isPurchase ? <><CloseCircleOutlined /> Verified</> :<> <CheckCircleOutlined style={{color:"red"}}/> <span style={{color:"red"}}>
+                    Failed</span></>}
                   </div>
                 </List.Item>
               )
