@@ -5,6 +5,7 @@
     border-radius: 0px;
     height: 100vh;
     margin: auto;
+  
 
     .f-col {
         background-color: #F3F6FF;
@@ -65,10 +66,12 @@
 }
 
 .main {
-    // background: #f9f9f9;
+    // background: #5e3e3e;
     height: 100%;
     display: flex;
-
+    background-image: url('https://i.pinimg.com/originals/4a/94/26/4a94268541d7a0ed95a8be5138e8a288.jpg');
+    
+  
     .login-form {
         min-width: 400px;
         margin: auto;
@@ -79,6 +82,7 @@
         position: relative;
         border: 1px solid #f0f0f0;
         text-align: center;
+    
 
         img {
             object-fit: scale-down;
@@ -109,13 +113,7 @@
         }
     }
 
-    .avatar {
-        // position: absolute;
-        // z-index: 1;
-        // top: -24px;
-        // left: 43%;
-        // border: 1px solid #f0f0f0;
-    }
+    
 
     .login-form-forgot {
         margin-top: 10px;

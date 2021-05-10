@@ -82,7 +82,8 @@ class Login extends React.Component {
       <div className='main-login'>
         <Row style={{ height: '100%' }}>
           <Col md={{ span: 24 }} lg={{ span: 12 }} className='f-col'>
-            <div className='main'>
+            <div className='main'
+           >
               <Form
                 name='normal_login'
                 className='login-form'
