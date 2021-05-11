@@ -47,6 +47,7 @@ class Header extends React.Component {
       .then(response => {
         if (response?.data) {
           const data = response?.data?.userProfileById
+          localStorage.setItem('emailId', data?.email)
           this.setState({
             firstName: data?.firstName,
             lastName: data?.lastName,

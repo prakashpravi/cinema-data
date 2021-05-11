@@ -33,6 +33,16 @@ export const requestAccpect = (id) => {
   }
   `
 };
+
+export const canccelrequestAccpect = (id) => {
+  return gql `mutation MyMutation {
+    deleteMovieTitleById(input: { id: "${id}" }) {
+      clientMutationId
+      deletedMovieTitleId
+    }
+  }`
+};
+
 export const myMoviesTitles = (id) => {
   return gql `query MyQuery {
   allMovieTitles(filter: {createdBy: {equalTo: "${id}"}, isPurchase: {equalTo: true}}) {

@@ -1,8 +1,21 @@
-import { Spin, List, Avatar, Typography, Empty, Button } from 'antd'
+import {
+  Spin,
+  List,
+  Avatar,
+  Typography,
+  Empty,
+  Button,
+  notification,
+  message
+} from 'antd'
 import * as React from 'react'
 import './styled.css'
 import { withApollo } from 'react-apollo'
-import { requestAll, requestAccpect } from '../../hooks/query'
+import {
+  requestAll,
+  requestAccpect,
+  canccelrequestAccpect
+} from '../../hooks/query'
 import moment from 'moment'
 const { Title } = Typography
 class Request extends React.Component {
@@ -27,6 +40,42 @@ class Request extends React.Component {
           })
         }
       })
+      .catch(err => {
+        console.log('err:', err)
+      })
+  }
+  cancelAll = async val => {
+    debugger
+    await fetch('http://193.164.132.55:3001/api/sent_message', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: localStorage.getItem('emailId'),
+        message: `Sorry the (${val?.englishTitleName}) movie name was decline`
+      })
+    })
+      .then(data => {
+        return data.json()
+      })
+      .then(response => {
+        notification.success({
+          message: 'Success',
+          description: 'This item was decline'
+        })
+        window.location.reload()
+      })
+      .catch(error => {
+        message.error('Faild to canel rquest', 5)
+        console.log(error, 5)
+      })
+    await this.props.client
+      .mutate({
+        mutation: canccelrequestAccpect(val.id)
+      })
+      .then(response => {})
       .catch(err => {
         console.log('err:', err)
       })
@@ -72,9 +121,10 @@ class Request extends React.Component {
                     title={
                       v?.englishTitleName +
                       ' ' +
-                      moment(v?.birthday).format('YYYY-MM-DD') +
-                      ' to ' +
                       moment(v?.birthday).format('YYYY-MM-DD')
+                      // +
+                      // ' to ' +
+                      // moment(v?.birthday).format('YYYY-MM-DD')
                     }
                     description={v?.description}
                   />
@@ -83,7 +133,11 @@ class Request extends React.Component {
                       Accpect
                     </Button>
                     &nbsp;
-                    <Button type='primary' danger>
+                    <Button
+                      type='primary'
+                      danger
+                      onClick={() => this.cancelAll(v)}
+                    >
                       Cancel
                     </Button>
                   </div>

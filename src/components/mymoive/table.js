@@ -3,7 +3,6 @@ import React from 'react'
 import { withApollo } from 'react-apollo'
 import { updatetabledata } from '../../hooks/query'
 import moment from 'moment'
-import { uuid } from 'uuidv4'
 const EditableCell = ({ editable, value, onChange }) => (
   <div>
     {editable ? (
@@ -50,16 +49,16 @@ class EditableTable extends React.Component {
             <div className='editable-row-operations'>
               {editable ? (
                 <span>
-                  <a onClick={() => this.save(record.key)}>Save</a>&nbsp;
+                  <b onClick={() => this.save(record.key)}>Save</b>&nbsp;
                   <Popconfirm
                     title='Sure to cancel?'
                     onConfirm={() => this.cancel(record.key)}
                   >
-                    <a>Cancel</a>
+                    <b>Cancel</b>
                   </Popconfirm>
                 </span>
               ) : (
-                <a onClick={() => this.edit(record.key)}>Edit</a>
+                <b onClick={() => this.edit(record.key)}>Edit</b>
               )}
             </div>
           )

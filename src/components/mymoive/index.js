@@ -3,12 +3,9 @@ import {
   List,
   Avatar,
   Typography,
-  Empty,
   Button,
   message,
-  notification,
-  Table,
-  Space
+  notification
 } from 'antd'
 import * as React from 'react'
 import './styled.css'
@@ -78,7 +75,6 @@ class Mymovie extends React.Component {
   }
 
   saveData = async fileData => {
-    const state = this.state
     // if (!state.data?.length > 0) {
     //   message.error('Please upload the movie file', 5)
     //   return
@@ -105,7 +101,7 @@ class Mymovie extends React.Component {
       })
   }
   render () {
-    const { loader, listdata, data } = this.state
+    const { loader, listdata } = this.state
 
     return (
       <div>
@@ -199,9 +195,7 @@ class Mymovie extends React.Component {
               })}
             {localStorage.getItem('admin') && (
               <div>
-                <EditableFormTable
-                  data={listdata}
-                />
+                <EditableFormTable data={listdata} />
               </div>
             )}
           </div>
