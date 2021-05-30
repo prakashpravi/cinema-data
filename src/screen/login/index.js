@@ -39,7 +39,7 @@ class Login extends React.Component {
   }
   handleSubmit = async () => {
     var bodyPayload
-    if (this.state.radio === 'Admin') {
+    if (this.state.radio === 'User') {
       bodyPayload = {
         username: this.state.username,
         user_category: this.state.categroy
@@ -123,7 +123,7 @@ class Login extends React.Component {
                 </Radio.Group>
                 <br />
                 <br />
-                {this.state.radio === 'Admin' && (
+                {this.state.radio === 'User' && (
                   <Form.Item
                     name='categroy'
                     rules={[
