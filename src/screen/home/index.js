@@ -35,7 +35,6 @@ class Home extends React.Component {
     return (
       <Row style={{ width: 'max-content' }}>
         <Col>
-          {' '}
           <Header {...this.props} />
           {this.Content()}
         </Col>

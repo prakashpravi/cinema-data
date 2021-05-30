@@ -25,7 +25,8 @@ class EditableTable extends React.Component {
         title: 'Name',
         dataIndex: 'englishTitleName',
         width: '25%',
-        render: (text, record) => this.renderColumns(text, record, 'englishTitleName')
+        render: (text, record) =>
+          this.renderColumns(text, record, 'englishTitleName')
       },
       {
         title: 'Description',
@@ -93,7 +94,7 @@ class EditableTable extends React.Component {
       this.setState({ data: newData })
     }
   }
-  save (key) {
+  save = async key => {
     const newData = [...this.state.data]
     const target = newData.filter(item => key === item.key)[0]
     if (target) {
@@ -113,7 +114,6 @@ class EditableTable extends React.Component {
             )
           })
           .then(res => {
-            console.log(res)
             notification.success({
               message: 'Success',
               description: 'Your details has been successfully updated!'

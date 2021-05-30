@@ -7,22 +7,26 @@ import {
   Avatar,
   Typography,
   Row,
-  Col
+  Col,
+  Select,
+  Radio
 } from 'antd'
 import * as React from 'react'
 import {
-  UserOutlined,
+  // UserOutlined,
   // LockOutlined,
   ArrowRightOutlined
 } from '@ant-design/icons'
 import './styled.css'
 const { Title } = Typography
+const { Option } = Select
 class Login extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       username: '',
-      password: ''
+      categroy: '',
+      radio: 'Admin'
     }
   }
   componentDidMount () {
@@ -34,7 +38,17 @@ class Login extends React.Component {
     })
   }
   handleSubmit = async () => {
-    debugger
+    var bodyPayload
+    if (this.state.radio === 'Admin') {
+      bodyPayload = {
+        username: this.state.username,
+        user_category: this.state.categroy
+      }
+    } else {
+      bodyPayload = {
+        username: this.state.username
+      }
+    }
     await message.loading('Login In....', 5)
     fetch('http://193.164.132.55:3001/api/login', {
       method: 'POST',
@@ -42,10 +56,7 @@ class Login extends React.Component {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        username: this.state.username,
-        password: this.state.password
-      })
+      body: JSON.stringify(bodyPayload)
     })
       .then(data => {
         return data.json()
@@ -68,7 +79,7 @@ class Login extends React.Component {
           this.props.history.push('/signin')
           // window.location.pathname = '/signin'
         } else {
-          message.error('Faild to login', 5) 
+          message.error('Faild to login', 5)
         }
       })
       .catch(error => {
@@ -76,14 +87,20 @@ class Login extends React.Component {
         console.log(error, 5)
       })
   }
+  onChangeRadio = e => {
+    this.setState({ radio: e.target.value })
+  }
   render () {
-    const { username } = this.state
+    const {
+      username,
+      // categroy,
+      radio
+    } = this.state
     return (
       <div className='main-login'>
         <Row style={{ height: '100%' }}>
           <Col md={{ span: 24 }} lg={{ span: 12 }} className='f-col'>
-            <div className='main'
-           >
+            <div className='main'>
               <Form
                 name='normal_login'
                 className='login-form'
@@ -97,12 +114,56 @@ class Login extends React.Component {
                 <Title level={3} className='title'>
                   Sign In
                 </Title>
+                <Radio.Group
+                  onChange={e => this.onChangeRadio(e)}
+                  value={radio}
+                >
+                  <Radio value={'Admin'}>Admin</Radio>
+                  <Radio value={'User'}>User</Radio>
+                </Radio.Group>
+                <br />
+                <br />
+                {this.state.radio === 'Admin' && (
+                  <Form.Item
+                    name='categroy'
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please select category'
+                      }
+                    ]}
+                  >
+                    <Select
+                      style={{
+                        width: '100%',
+                        margintBottom: 40,
+                        textAlign: 'left'
+                      }}
+                      allowClear
+                      showSearch
+                      placeholder='Please select category'
+                      onChange={e => this.setInputValue('categroy', e)}
+                    >
+                      {[
+                        'Thenandal films',
+                        'Five star films',
+                        'Studio 9',
+                        'Maruthi films ',
+                        'Mannan films',
+                        'Shri mishri production'
+                      ].map(v => {
+                        return <Option value={v}>{v}</Option>
+                      })}
+                    </Select>
+                  </Form.Item>
+                )}
+
                 <Form.Item
                   name='username'
                   rules={[
                     {
                       required: true,
-                      message: 'Please enter your username!'
+                      message: 'Please enter your userid / mail!'
                     }
                   ]}
                 >
@@ -113,32 +174,12 @@ class Login extends React.Component {
                     onChange={e =>
                       this.setInputValue('username', e.target.value)
                     }
-                    prefix={<UserOutlined className='site-form-item-icon' />}
+                    // prefix={<UserOutlined className='site-form-item-icon' />}
                     value={username}
                     placeholder='user id / mail'
                   />
                 </Form.Item>
-                {/* <Form.Item
-                  name='password'
-                  rules={[
-                    {
-                      required: true,
-                      message: 'please enter your password!'
-                    }
-                  ]}
-                >
-                  <Input.Password
-                    value={password}
-                    autoComplete='off'
-                    className='Input'
-                    onChange={e =>
-                      this.setInputValue('password', e.target.value)
-                    }
-                    prefix={<LockOutlined className='site-form-item-icon' />}
-                    type='password'
-                    placeholder='Password'
-                  />
-                </Form.Item> */}
+
                 <Form.Item style={{ margin: 0 }}>
                   {/* <Form.Item name='remember' valuePropName='checked' noStyle>
                     <span className='login-form-keep'>Keep me login</span>

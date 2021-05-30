@@ -4,6 +4,8 @@ import './styled.css'
 import { withApollo } from 'react-apollo'
 import { allMoviesTitles, myMoviesTitles1 } from '../../hooks/query'
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+import { UserOutlined } from '@ant-design/icons'
+
 const { Title } = Typography
 class Notification extends React.Component {
   constructor (props) {
@@ -52,7 +54,12 @@ class Notification extends React.Component {
               return (
                 <List.Item className='cards'>
                   <List.Item.Meta
-                    avatar={<Avatar src={v?.movieImage} />}
+                    avatar={
+                      <Avatar
+                        src={v?.movieImage}
+                        icon={!v?.movieImage && <UserOutlined />}
+                      />
+                    }
                     title={v?.englishTitleName}
                     description={v?.description}
                   />

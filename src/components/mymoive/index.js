@@ -15,6 +15,8 @@ import moment from 'moment'
 import { CloudUploadOutlined } from '@ant-design/icons'
 import axios from 'axios'
 import EditableFormTable from './table'
+import { UserOutlined } from '@ant-design/icons'
+
 const { Title } = Typography
 class Mymovie extends React.Component {
   constructor (props) {
@@ -35,7 +37,10 @@ class Mymovie extends React.Component {
       })
       .then(response => {
         if (response?.data) {
-          const data = response?.data?.allMovieTitles?.nodes
+          const data = response?.data?.allMovieTitles?.nodes?.map((v, i) => {
+            v.key = i + 1
+            return v
+          })
           this.setState({
             listdata: data
           })
@@ -174,7 +179,12 @@ class Mymovie extends React.Component {
                 return (
                   <List.Item className='cards'>
                     <List.Item.Meta
-                      avatar={<Avatar src={v?.movieImage} />}
+                      avatar={
+                        <Avatar
+                          src={v?.movieImage}
+                          icon={!v?.movieImage && <UserOutlined />}
+                        />
+                      }
                       title={
                         v?.englishTitleName +
                         ' ' +

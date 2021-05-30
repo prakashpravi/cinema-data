@@ -16,6 +16,8 @@ import {
   requestAccpect,
   canccelrequestAccpect
 } from '../../hooks/query'
+import { UserOutlined } from '@ant-design/icons';
+
 import moment from 'moment'
 const { Title } = Typography
 class Request extends React.Component {
@@ -117,7 +119,12 @@ class Request extends React.Component {
               return (
                 <List.Item className='cards'>
                   <List.Item.Meta
-                    avatar={<Avatar src={v?.movieImage} />}
+                    avatar={
+                      <Avatar
+                        src={v?.movieImage}
+                        icon={!v?.movieImage && <UserOutlined />}
+                      />
+                    }
                     title={
                       v?.englishTitleName +
                       ' ' +

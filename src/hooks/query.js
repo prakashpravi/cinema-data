@@ -55,6 +55,7 @@ export const myMoviesTitles = (id) => {
       price
       movieImage
       isPurchase
+      tamilTitleName
     }
   }
 }
@@ -89,6 +90,7 @@ export const allMoviesTitles = gql `query MyQuery {
     movieImage
     description
     isPurchase
+    tamilTitleName
     }
   }
 }`;
